@@ -1159,12 +1159,12 @@
         gap: 12px;
       }
 
-      .topbar-right {
+      /* .topbar-right {
         width: 100%;
         justify-content: space-between;
         border-top: 1px solid var(--border);
         padding-top: 8px;
-      }
+      } */
     }
 
     @media (max-width: 600px) {
@@ -1251,39 +1251,34 @@
 
       <!-- Top bar -->
 
-      <div class="topbar">
-        <div class="d-flex align-items-center justify-content-between w-100 flex-wrap gap-2">
-          <div class="d-flex align-items-center gap-2">
-            <!-- Hamburger Button for mobile -->
-            <button class="btn btn-light d-lg-none" id="menuToggleBtn"
-              style="border:1px solid var(--border); padding: 4px 10px;">
-              <i class="bi bi-list" style="font-size: 18px;"></i>
-            </button>
-            <div>
-              <!-- Main Brand Name appears first on mobile now -->
-              <div class="d-flex align-items-center gap-2">
-                <span class="fw-bold text-success d-lg-none"
-                  style="font-family:'Space Grotesk'; font-size:16px;">SmartBin</span>
-                <span class="text-muted d-lg-none" style="font-size:14px;">|</span>
-                <h1 class="topbar-title" id="viewTitle" style="font-size: 16px; font-weight: 700;">Live Monitor</h1>
-              </div>
-              <div class="topbar-subtitle d-none d-sm-block" id="viewSubtitle" style="font-size: 12px;">Real-time bin
-                telemetry &amp; alerts</div>
+    <div class="topbar">
+      <div class="d-flex align-items-center justify-content-between w-100 flex-wrap gap-2">
+        <div class="d-flex align-items-center gap-2">
+          <!-- Hamburger Button for mobile -->
+          <button class="btn btn-light d-lg-none" id="menuToggleBtn" style="border:1px solid var(--border); padding: 4px 10px;">
+            <i class="bi bi-list" style="font-size: 18px;"></i>
+          </button>
+          <div>
+            <!-- Main Brand Name and Title -->
+            <div class="d-flex align-items-center gap-2">
+              <span class="fw-bold text-success d-lg-none" style="font-family:'Space Grotesk'; font-size:16px;">SmartBin</span>
+              <span class="text-muted d-lg-none" style="font-size:14px;">|</span>
+              <h1 class="topbar-title" id="viewTitle" style="font-size: 16px; font-weight: 700;">Live Monitor</h1>
             </div>
+            <div class="topbar-subtitle d-none d-sm-block" id="viewSubtitle" style="font-size: 12px;">Real-time bin telemetry &amp; alerts</div>
           </div>
-
-          <!-- Live Realtime Clock visible on all devices -->
+        </div>
+        
+        <!-- Synchronization and Live Clock Area for all devices -->
+        <div class="d-flex align-items-center gap-3">
+          <div class="last-sync" style="font-size: 12px; color: var(--text-muted);">Last sync: <span id="lastSync">--:--:--</span></div>
           <div class="realtime-clock">
             <div class="rt-date" id="rtDate">—</div>
             <div class="rt-time" id="rtTime">00:00:00</div>
           </div>
         </div>
-
-        <div class="topbar-right">
-          <div class="last-sync">Last sync: <span id="lastSync">--:--:--</span></div>
-        </div>
       </div>
-
+    </div>
       <!-- Body -->
       <div class="dash-body">
 
