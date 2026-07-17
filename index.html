@@ -506,14 +506,23 @@
     .btn-save { background: var(--green); color: #fff; border: none; padding: 10px 22px; border-radius: var(--radius-sm); font-weight: 600; font-size: 13px; cursor: pointer; transition: 0.15s; box-shadow: var(--shadow-glow); }
     .btn-save:hover { background: var(--green-deep); }
 
+    /* ── Mobile Queries (Responsive Overlay) ──────────────── */
     @media (max-width: 900px) {
-      .sidebar { display: none; }
+      .sidebar { 
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+      .sidebar.show {
+        transform: translateX(0);
+        box-shadow: 0 0 20px rgba(0,0,0,0.15);
+      }
       .dash-main { margin-left: 0; }
+      .topbar { padding: 16px 20px; }
     }
     @media (max-width: 600px) {
       .dash-body { padding: 18px; }
-      .topbar { padding: 14px 18px; }
       .form-row { flex-direction: column; align-items: flex-start; }
+      .realtime-clock { display: none; } /* ဖိုန်းမှာ နေရာချွေတာရန် */
     }
   </style>
 </head>
@@ -544,7 +553,6 @@
     </nav>
 
     <div class="sidebar-footer">
-      <!-- රිෆ්‍රෙෂ් කරද්දී මුලින්ම offline (Connecting...) කියලා පේන්න මෙතන වෙනස් කළා -->
       <div id="connStatus" class="conn-pill offline">
         <span class="conn-dot pulse"></span>
         <span id="connText">Connecting...</span>
@@ -557,9 +565,15 @@
 
     <!-- Top bar -->
     <div class="topbar">
-      <div>
-        <h1 class="topbar-title" id="viewTitle">Live Monitor</h1>
-        <div class="topbar-subtitle" id="viewSubtitle">Real-time bin telemetry &amp; alerts</div>
+      <div class="d-flex align-items-center gap-3">
+        <!-- ဖိုန်းဗားရှင်းအတွက် Hamburger Button -->
+        <button class="btn btn-light d-lg-none" id="menuToggleBtn" style="border:1px solid var(--border)">
+          <i class="bi bi-list" style="font-size: 20px;"></i>
+        </button>
+        <div>
+          <h1 class="topbar-title" id="viewTitle">Live Monitor</h1>
+          <div class="topbar-subtitle" id="viewSubtitle">Real-time bin telemetry &amp; alerts</div>
+        </div>
       </div>
       <div class="topbar-right">
         <div class="last-sync">Last sync: <span id="lastSync">--:--:--</span></div>
@@ -802,7 +816,6 @@
 
 <!-- ═══════════ JAVASCRIPT LOGIC ═══════════ -->
 <script>
-  // WebSocket Setup
   let gateway = `ws://${window.location.hostname}/ws`;
   let websocket;
   let startTime = Date.now();
@@ -813,10 +826,10 @@
     initClock();
     initNavigation();
     initWebSocket();
+    initMobileMenu(); // Mobile Hamburger Trigger
     setInterval(updateUptime, 1000);
   }
 
-  // Real-time Top Clock
   function initClock() {
     const rtTime = document.getElementById('rtTime');
     const rtDate = document.getElementById('rtDate');
@@ -830,7 +843,6 @@
     tick();
   }
 
-  // Tab View Switcher Navigation
   function initNavigation() {
     const links = document.querySelectorAll('.sidebar-nav .nav-link');
     links.forEach(link => {
@@ -839,19 +851,41 @@
         links.forEach(l => l.classList.remove('active'));
         link.classList.add('active');
 
-        // Toggle Views
         const targetView = link.getAttribute('data-view');
         document.querySelectorAll('.view-panel').forEach(panel => panel.classList.remove('active'));
         document.getElementById(`view-${targetView}`).classList.add('active');
 
-        // Update Title TopBar
         document.getElementById('viewTitle').textContent = link.getAttribute('data-title');
         document.getElementById('viewSubtitle').textContent = link.getAttribute('data-sub');
       });
     });
   }
 
-  // WebSocket Core Lifecycle
+  function initMobileMenu() {
+    const toggleBtn = document.getElementById('menuToggleBtn');
+    const sidebar = document.querySelector('.sidebar');
+    const navLinks = document.querySelectorAll('.sidebar-nav .nav-link');
+
+    if(toggleBtn && sidebar) {
+      toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        sidebar.classList.toggle('show');
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!sidebar.contains(e.target) && sidebar.classList.contains('show')) {
+          sidebar.classList.remove('show');
+        }
+      });
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          sidebar.classList.remove('show');
+        });
+      });
+    }
+  }
+
   function initWebSocket() {
     console.log('Attempting WebSocket connection...');
     websocket = new WebSocket(gateway);
@@ -861,23 +895,19 @@
   }
 
   function onOpen(event) {
-    console.log('Connection opened');
     const connStatus = document.getElementById('connStatus');
     const connText = document.getElementById('connText');
-    
     connStatus.className = 'conn-pill online';
     connText.textContent = 'ESP32 Online';
     document.getElementById('devIp').textContent = window.location.hostname || '11.0.0.1';
   }
 
   function onClose(event) {
-    console.log('Connection closed');
     const connStatus = document.getElementById('connStatus');
     const connText = document.getElementById('connText');
-    
     connStatus.className = 'conn-pill offline';
     connText.textContent = 'Connecting...';
-    setTimeout(initWebSocket, 2000); // Auto Retry Reconnect
+    setTimeout(initWebSocket, 2000);
   }
 
   function onMessage(event) {
@@ -897,9 +927,7 @@
     }
   }
 
-  // Dynamic UI Binder
   function updateBinUI(binName, fill, deposits, isOpen) {
-    // Fill updates
     const fillEl = document.getElementById(`fill-${binName}`);
     const barEl = document.getElementById(`bar-${binName}`);
     const pctEl = document.getElementById(`pct-${binName}`);
@@ -911,18 +939,15 @@
 
     if(!fillEl) return;
 
-    // Apply Fill Heights
     fillEl.style.height = `${fill}%`;
     barEl.style.width = `${fill}%`;
     pctEl.textContent = `${fill}%`;
     valEl.textContent = `${fill}%`;
     tapsEl.textContent = deposits;
 
-    // Servo Lid State
     if(isOpen) lidEl.classList.add('open');
     else lidEl.classList.remove('open');
 
-    // Threshold coloring
     if(fill >= 85) {
       fillEl.style.background = 'linear-gradient(to top, #DC2626, #EF4444)';
       pillEl.className = 'bin-status-pill pill-locked';
@@ -941,11 +966,9 @@
     }
   }
 
-  // Actions Outbound
   function sendEmptyCmd(binName) {
     if(websocket && websocket.readyState === WebSocket.OPEN) {
       websocket.send(JSON.stringify({ command: 'empty', bin: binName }));
-      // Optimistic Reset UI locally
       updateBinUI(binName, 0, 0, false);
     }
   }
