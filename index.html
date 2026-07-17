@@ -1,48 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SmartBin — Waste Management Dashboard</title>
 
   <!-- Bootstrap 5.3 -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <!-- Bootstrap Icons -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap"
+    rel="stylesheet" />
 
   <style>
     /* ── Design tokens (Light Theme) ──────────────────── */
     :root {
-      --bg-base:    #F1F5F9;   /* app canvas */
-      --bg-panel:   #FFFFFF;   /* sidebar / topbar */
-      --bg-card:    #FFFFFF;   /* cards */
-      --bg-raised:  #F8FAFC;   /* subtle raised surfaces */
-      --bg-glass:   rgba(16,185,129,0.04);
+      --bg-base: #F1F5F9;
+      /* app canvas */
+      --bg-panel: #FFFFFF;
+      /* sidebar / topbar */
+      --bg-card: #FFFFFF;
+      /* cards */
+      --bg-raised: #F8FAFC;
+      /* subtle raised surfaces */
+      --bg-glass: rgba(16, 185, 129, 0.04);
 
-      --border:      #E2E8F0;
+      --border: #E2E8F0;
       --border-strong: #CBD5E1;
 
-      --text-head:  #0F172A;
-      --text-body:  #334155;
+      --text-head: #0F172A;
+      --text-body: #334155;
       --text-muted: #64748B;
 
-      --green:      #10B981;
+      --green: #10B981;
       --green-deep: #059669;
       --green-soft: #D1FAE5;
-      --amber:      #F59E0B;
+      --amber: #F59E0B;
       --amber-soft: #FEF3C7;
-      --red:        #EF4444;
-      --red-soft:   #FEE2E2;
-      --blue:       #3B82F6;
-      --purple:     #8B5CF6;
-      --purple-soft:#EDE9FE;
+      --red: #EF4444;
+      --red-soft: #FEE2E2;
+      --blue: #3B82F6;
+      --purple: #8B5CF6;
+      --purple-soft: #EDE9FE;
 
-      --shadow-sm:  0 1px 2px 0 rgb(0 0 0 / 0.04);
-      --shadow-md:  0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.04);
-      --shadow-lg:  0 10px 15px -3px rgb(0 0 0 / 0.06), 0 4px 6px -4px rgb(0 0 0 / 0.04);
-      --shadow-glow:0 8px 24px -8px rgba(16,185,129,0.35);
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.04);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.06), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+      --shadow-glow: 0 8px 24px -8px rgba(16, 185, 129, 0.35);
 
       --radius-sm: 8px;
       --radius-md: 14px;
@@ -50,7 +57,12 @@
     }
 
     /* ── Base ─────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
     body {
       background: var(--bg-base);
       color: var(--text-body);
@@ -59,11 +71,26 @@
       min-height: 100vh;
       -webkit-font-smoothing: antialiased;
     }
-    h1,h2,h3,h4,h5 { font-family: 'Space Grotesk', sans-serif; color: var(--text-head); letter-spacing: -0.01em; }
-    .mono { font-family: 'JetBrains Mono', monospace; }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--text-head);
+      letter-spacing: -0.01em;
+    }
+
+    .mono {
+      font-family: 'JetBrains Mono', monospace;
+    }
 
     /* ── Layout shell ─────────────────────────────────── */
-    .dash-shell { display: flex; min-height: 100vh; }
+    .dash-shell {
+      display: flex;
+      min-height: 100vh;
+    }
 
     /* ── Sidebar ──────────────────────────────────────── */
     .sidebar {
@@ -75,17 +102,21 @@
       flex-direction: column;
       padding: 26px 0;
       position: fixed;
-      top: 0; left: 0;
+      top: 0;
+      left: 0;
       height: 100vh;
       z-index: 100;
     }
+
     .sidebar-logo {
       padding: 0 24px 24px;
       border-bottom: 1px solid var(--border);
       margin-bottom: 20px;
     }
+
     .sidebar-logo .logo-mark {
-      width: 40px; height: 40px;
+      width: 40px;
+      height: 40px;
       background: linear-gradient(135deg, var(--green), #34D399);
       border-radius: 10px;
       display: inline-flex;
@@ -96,12 +127,14 @@
       margin-bottom: 12px;
       box-shadow: var(--shadow-glow);
     }
+
     .sidebar-logo h5 {
       margin: 0;
       font-size: 17px;
       font-weight: 700;
       letter-spacing: -0.3px;
     }
+
     .sidebar-logo small {
       font-size: 10.5px;
       color: var(--text-muted);
@@ -109,6 +142,7 @@
       letter-spacing: 1.2px;
       font-weight: 600;
     }
+
     .nav-section-label {
       font-size: 10px;
       text-transform: uppercase;
@@ -118,6 +152,7 @@
       margin-top: 8px;
       font-weight: 700;
     }
+
     .sidebar-nav .nav-link {
       color: var(--text-body);
       padding: 10px 24px;
@@ -130,27 +165,39 @@
       transition: all 0.15s ease;
       position: relative;
     }
-    .sidebar-nav .nav-link:hover { background: var(--bg-raised); color: var(--text-head); }
+
+    .sidebar-nav .nav-link:hover {
+      background: var(--bg-raised);
+      color: var(--text-head);
+    }
+
     .sidebar-nav .nav-link.active {
       background: var(--bg-glass);
       color: var(--green-deep);
       font-weight: 600;
     }
+
     .sidebar-nav .nav-link.active::before {
-      content:'';
-      position:absolute;
-      left:0; top:6px; bottom:6px;
-      width:3px;
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 6px;
+      bottom: 6px;
+      width: 3px;
       background: var(--green);
       border-radius: 0 3px 3px 0;
     }
-    .sidebar-nav .nav-link i { font-size: 16px; }
+
+    .sidebar-nav .nav-link i {
+      font-size: 16px;
+    }
 
     .sidebar-footer {
       margin-top: auto;
       padding: 20px 24px 4px;
       border-top: 1px solid var(--border);
     }
+
     .conn-pill {
       display: inline-flex;
       align-items: center;
@@ -161,18 +208,49 @@
       font-weight: 600;
       border: 1px solid transparent;
     }
-    .conn-pill.online  { background: var(--green-soft); color: var(--green-deep); border-color: rgba(16,185,129,0.2); }
-    .conn-pill.offline { background: var(--red-soft);   color: var(--red);        border-color: rgba(239,68,68,0.2); }
+
+    .conn-pill.online {
+      background: var(--green-soft);
+      color: var(--green-deep);
+      border-color: rgba(16, 185, 129, 0.2);
+    }
+
+    .conn-pill.offline {
+      background: var(--red-soft);
+      color: var(--red);
+      border-color: rgba(239, 68, 68, 0.2);
+    }
+
     .conn-dot {
-      width: 7px; height: 7px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       background: currentColor;
     }
-    .conn-dot.pulse { animation: connPulse 1.5s infinite; }
-    @keyframes connPulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+
+    .conn-dot.pulse {
+      animation: connPulse 1.5s infinite;
+    }
+
+    @keyframes connPulse {
+
+      0%,
+      100% {
+        opacity: 1
+      }
+
+      50% {
+        opacity: 0.35
+      }
+    }
 
     /* ── Main content ─────────────────────────────────── */
-    .dash-main { margin-left: 240px; flex: 1; display: flex; flex-direction: column; }
+    .dash-main {
+      margin-left: 240px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
 
     /* ── Top bar ──────────────────────────────────────── */
     .topbar {
@@ -186,9 +264,25 @@
       top: 0;
       z-index: 90;
     }
-    .topbar-title { font-size: 19px; font-weight: 700; color: var(--text-head); margin: 0; }
-    .topbar-subtitle { font-size: 12.5px; color: var(--text-muted); margin-top: 2px; }
-    .topbar-right { display: flex; align-items: center; gap: 14px; }
+
+    .topbar-title {
+      font-size: 19px;
+      font-weight: 700;
+      color: var(--text-head);
+      margin: 0;
+    }
+
+    .topbar-subtitle {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
 
     .realtime-clock {
       display: flex;
@@ -202,6 +296,7 @@
       min-width: 170px;
       box-shadow: var(--shadow-sm);
     }
+
     .rt-date {
       font-size: 10.5px;
       color: var(--text-muted);
@@ -209,6 +304,7 @@
       text-transform: uppercase;
       letter-spacing: 0.9px;
     }
+
     .rt-time {
       font-size: 20px;
       font-weight: 700;
@@ -217,11 +313,22 @@
       line-height: 1.1;
       font-family: 'JetBrains Mono', monospace;
     }
-    .last-sync { font-size: 12px; color: var(--text-muted); }
-    .last-sync span { color: var(--green-deep); font-weight: 600; }
+
+    .last-sync {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .last-sync span {
+      color: var(--green-deep);
+      font-weight: 600;
+    }
 
     /* ── Page body ────────────────────────────────────── */
-    .dash-body { padding: 30px 32px; flex: 1; }
+    .dash-body {
+      padding: 30px 32px;
+      flex: 1;
+    }
 
     /* ── Stat summary row ─────────────────────────────── */
     .stat-card {
@@ -232,18 +339,42 @@
       box-shadow: var(--shadow-md);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+
+    .stat-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
     .stat-card .stat-icon {
-      width: 44px; height: 44px;
+      width: 44px;
+      height: 44px;
       border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 19px;
       margin-bottom: 14px;
     }
-    .icon-green  { background: var(--green-soft); color: var(--green-deep); }
-    .icon-amber  { background: var(--amber-soft); color: var(--amber); }
-    .icon-purple { background: var(--purple-soft); color: var(--purple); }
-    .icon-blue   { background: #DBEAFE; color: var(--blue); }
+
+    .icon-green {
+      background: var(--green-soft);
+      color: var(--green-deep);
+    }
+
+    .icon-amber {
+      background: var(--amber-soft);
+      color: var(--amber);
+    }
+
+    .icon-purple {
+      background: var(--purple-soft);
+      color: var(--purple);
+    }
+
+    .icon-blue {
+      background: #DBEAFE;
+      color: var(--blue);
+    }
 
     .stat-card .stat-value {
       font-family: 'Space Grotesk', sans-serif;
@@ -253,7 +384,13 @@
       line-height: 1;
       letter-spacing: -0.02em;
     }
-    .stat-card .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 6px; font-weight: 500; }
+
+    .stat-card .stat-label {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-weight: 500;
+    }
 
     /* ── Section label ────────────────────────────────── */
     .section-label {
@@ -276,72 +413,109 @@
       position: relative;
       overflow: hidden;
     }
-    .bin-card:hover { box-shadow: var(--shadow-lg); }
+
+    .bin-card:hover {
+      box-shadow: var(--shadow-lg);
+    }
+
     .bin-card.full-alert {
-      border-color: rgba(239,68,68,0.4);
-      box-shadow: 0 0 0 3px rgba(239,68,68,0.08), var(--shadow-md);
+      border-color: rgba(239, 68, 68, 0.4);
+      box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.08), var(--shadow-md);
       animation: redPulse 1.6s infinite;
     }
+
     @keyframes redPulse {
-      0%,100% { box-shadow: 0 0 0 3px rgba(239,68,68,0.08), var(--shadow-md); }
-      50%      { box-shadow: 0 0 0 6px rgba(239,68,68,0.15), var(--shadow-md); }
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.08), var(--shadow-md);
+      }
+
+      50% {
+        box-shadow: 0 0 0 6px rgba(239, 68, 68, 0.15), var(--shadow-md);
+      }
     }
 
     /* ── Bin cylinder (glass look) ────────────────────── */
-    .bin-cylinder-wrap { display: flex; flex-direction: column; align-items: center; margin: 18px 0 22px; }
+    .bin-cylinder-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 18px 0 22px;
+    }
+
     .bin-cylinder {
       width: 88px;
       height: 150px;
       border: 1.5px solid var(--border-strong);
       border-radius: 14px;
-      background: linear-gradient(180deg, rgba(16,185,129,0.05) 0%, rgba(241,245,249,0.6) 100%);
+      background: linear-gradient(180deg, rgba(16, 185, 129, 0.05) 0%, rgba(241, 245, 249, 0.6) 100%);
       backdrop-filter: blur(4px);
       position: relative;
       overflow: hidden;
       box-shadow:
-        inset 0 2px 6px rgba(255,255,255,0.9),
-        inset 0 -8px 16px rgba(16,185,129,0.06),
-        0 4px 12px rgba(15,23,42,0.06);
+        inset 0 2px 6px rgba(255, 255, 255, 0.9),
+        inset 0 -8px 16px rgba(16, 185, 129, 0.06),
+        0 4px 12px rgba(15, 23, 42, 0.06);
     }
+
     .bin-cylinder::before {
-      content:'';
-      position:absolute;
-      top:6px; left:8px;
-      width:14px; height:60%;
-      background: linear-gradient(180deg, rgba(255,255,255,0.7), rgba(255,255,255,0));
+      content: '';
+      position: absolute;
+      top: 6px;
+      left: 8px;
+      width: 14px;
+      height: 60%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0));
       border-radius: 8px;
-      pointer-events:none;
+      pointer-events: none;
       z-index: 3;
     }
+
     .bin-cylinder-fill {
       position: absolute;
-      bottom: 0; left: 0; right: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
       height: 0%;
       background: linear-gradient(to top, var(--green-deep), var(--green));
       border-radius: 0 0 12px 12px;
       transition: height 1s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s;
       z-index: 1;
     }
+
     .bin-cylinder-fill::after {
       content: '';
       position: absolute;
-      top: 0; left: -100%;
-      width: 300%; height: 6px;
-      background: rgba(255,255,255,0.35);
+      top: 0;
+      left: -100%;
+      width: 300%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.35);
       border-radius: 50%;
       animation: ripple 3s linear infinite;
     }
-    @keyframes ripple { 0%{left:-100%} 100%{left:100%} }
+
+    @keyframes ripple {
+      0% {
+        left: -100%
+      }
+
+      100% {
+        left: 100%
+      }
+    }
 
     .bin-pct-label {
       position: absolute;
-      top: 50%; left: 50%;
+      top: 50%;
+      left: 50%;
       transform: translate(-50%, -50%);
       font-family: 'Space Grotesk', sans-serif;
       font-size: 22px;
       font-weight: 700;
       color: var(--text-head);
-      text-shadow: 0 1px 2px rgba(255,255,255,0.7);
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.7);
       z-index: 2;
     }
 
@@ -353,14 +527,31 @@
       background: linear-gradient(180deg, #E2E8F0, #CBD5E1);
       border: 1px solid var(--border-strong);
       transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.4s;
-      box-shadow: 0 2px 4px rgba(15,23,42,0.08);
+      box-shadow: 0 2px 4px rgba(15, 23, 42, 0.08);
       transform-origin: left center;
     }
-    .bin-lid.open { transform: rotate(-35deg) translateX(-6px) translateY(-4px); background: linear-gradient(180deg, #D1FAE5, #A7F3D0); }
+
+    .bin-lid.open {
+      transform: rotate(-35deg) translateX(-6px) translateY(-4px);
+      background: linear-gradient(180deg, #D1FAE5, #A7F3D0);
+    }
 
     /* ── Bin info ─────────────────────────────────────── */
-    .bin-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
-    .bin-name { font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 700; color: var(--text-head); margin: 0; }
+    .bin-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .bin-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text-head);
+      margin: 0;
+    }
+
     .bin-status-pill {
       display: inline-flex;
       align-items: center;
@@ -373,29 +564,103 @@
       letter-spacing: 0.6px;
       border: 1px solid transparent;
     }
-    .pill-ok     { background: var(--green-soft); color: var(--green-deep); border-color: rgba(16,185,129,0.2); }
-    .pill-warn   { background: var(--amber-soft); color: #B45309; border-color: rgba(245,158,11,0.25); }
-    .pill-locked { background: var(--red-soft);   color: var(--red); border-color: rgba(239,68,68,0.25); }
-    .pill-idle   { background: var(--purple-soft);color: var(--purple); border-color: rgba(139,92,246,0.25); }
 
-    .fill-bar-track { height: 6px; border-radius: 3px; background: var(--bg-raised); overflow: hidden; margin-top: 10px; border: 1px solid var(--border); }
-    .fill-bar-fill { height: 100%; width: 0%; border-radius: 3px; background: linear-gradient(to right, var(--green), var(--green-deep)); transition: width 1s ease; }
+    .pill-ok {
+      background: var(--green-soft);
+      color: var(--green-deep);
+      border-color: rgba(16, 185, 129, 0.2);
+    }
 
-    .bin-meta { display: flex; gap: 14px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
-    .bin-meta-item { flex: 1; }
-    .bin-meta-item .val { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: var(--text-head); line-height: 1.1; }
-    .bin-meta-item .lbl { font-size: 11px; color: var(--text-muted); margin-top: 3px; font-weight: 500; }
+    .pill-warn {
+      background: var(--amber-soft);
+      color: #B45309;
+      border-color: rgba(245, 158, 11, 0.25);
+    }
+
+    .pill-locked {
+      background: var(--red-soft);
+      color: var(--red);
+      border-color: rgba(239, 68, 68, 0.25);
+    }
+
+    .pill-idle {
+      background: var(--purple-soft);
+      color: var(--purple);
+      border-color: rgba(139, 92, 246, 0.25);
+    }
+
+    .fill-bar-track {
+      height: 6px;
+      border-radius: 3px;
+      background: var(--bg-raised);
+      overflow: hidden;
+      margin-top: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .fill-bar-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 3px;
+      background: linear-gradient(to right, var(--green), var(--green-deep));
+      transition: width 1s ease;
+    }
+
+    .bin-meta {
+      display: flex;
+      gap: 14px;
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .bin-meta-item {
+      flex: 1;
+    }
+
+    .bin-meta-item .val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-head);
+      line-height: 1.1;
+    }
+
+    .bin-meta-item .lbl {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 3px;
+      font-weight: 500;
+    }
 
     .btn-mark-empty {
-      width: 100%; margin-top: 16px; padding: 10px; border-radius: var(--radius-sm);
-      border: 1px solid var(--border); background: var(--bg-raised); color: var(--text-body);
-      font-size: 13px; font-weight: 600; transition: all 0.15s; cursor: pointer;
-      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      width: 100%;
+      margin-top: 16px;
+      padding: 10px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border);
+      background: var(--bg-raised);
+      color: var(--text-body);
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.15s;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
     }
-    .btn-mark-empty:hover { background: var(--green); border-color: var(--green); color: #fff; box-shadow: var(--shadow-glow); }
+
+    .btn-mark-empty:hover {
+      background: var(--green);
+      border-color: var(--green);
+      color: #fff;
+      box-shadow: var(--shadow-glow);
+    }
 
     /* ── Panels (alerts / log) ────────────────────────── */
-    .alert-panel, .log-panel {
+    .alert-panel,
+    .log-panel {
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: var(--radius-md);
@@ -403,6 +668,7 @@
       overflow: hidden;
       margin-bottom: 20px;
     }
+
     .panel-header {
       padding: 16px 22px;
       border-bottom: 1px solid var(--border);
@@ -414,117 +680,485 @@
       justify-content: space-between;
       font-family: 'Space Grotesk', sans-serif;
     }
+
     .panel-header .live-pill {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: var(--green-soft); color: var(--green-deep);
-      padding: 3px 10px; border-radius: 20px;
-      font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--green-soft);
+      color: var(--green-deep);
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
       font-family: 'Inter', sans-serif;
     }
-    .live-pill .conn-dot { background: var(--green); }
 
-    .panel-body { padding: 8px 22px 18px; }
-
-    .alert-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); }
-    .alert-item:last-child { border-bottom: none; }
-    .alert-icon-wrap {
-      width: 38px; height: 38px; border-radius: 10px;
-      display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;
+    .live-pill .conn-dot {
+      background: var(--green);
     }
-    .ai-red    { background: var(--red-soft);    color: var(--red); }
-    .ai-amber  { background: var(--amber-soft);  color: #B45309; }
-    .ai-purple { background: var(--purple-soft); color: var(--purple); }
-    .alert-title { font-weight: 700; color: var(--text-head); font-size: 13.5px; }
-    .alert-desc  { font-size: 12.5px; color: var(--text-muted); margin-top: 2px; line-height: 1.45; }
-    .alert-time  { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
 
-    .no-alerts { text-align: center; padding: 32px 0 20px; color: var(--text-muted); font-size: 13px; }
-    .no-alerts i { font-size: 34px; display: block; margin-bottom: 10px; color: var(--green); }
+    .panel-body {
+      padding: 8px 22px 18px;
+    }
+
+    .alert-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .alert-item:last-child {
+      border-bottom: none;
+    }
+
+    .alert-icon-wrap {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .ai-red {
+      background: var(--red-soft);
+      color: var(--red);
+    }
+
+    .ai-amber {
+      background: var(--amber-soft);
+      color: #B45309;
+    }
+
+    .ai-purple {
+      background: var(--purple-soft);
+      color: var(--purple);
+    }
+
+    .alert-title {
+      font-weight: 700;
+      color: var(--text-head);
+      font-size: 13.5px;
+    }
+
+    .alert-desc {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      line-height: 1.45;
+    }
+
+    .alert-time {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .no-alerts {
+      text-align: center;
+      padding: 32px 0 20px;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    .no-alerts i {
+      font-size: 34px;
+      display: block;
+      margin-bottom: 10px;
+      color: var(--green);
+    }
 
     /* ── Activity log ─────────────────────────────────── */
-    .log-entry { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 12.5px; }
-    .log-entry:last-child { border-bottom: none; }
-    .log-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 0 3px rgba(15,23,42,0.04); }
-    .log-msg { color: var(--text-body); flex: 1; }
-    .log-time { color: var(--text-muted); font-size: 11px; white-space: nowrap; }
+    .log-entry {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 12.5px;
+    }
+
+    .log-entry:last-child {
+      border-bottom: none;
+    }
+
+    .log-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.04);
+    }
+
+    .log-msg {
+      color: var(--text-body);
+      flex: 1;
+    }
+
+    .log-time {
+      color: var(--text-muted);
+      font-size: 11px;
+      white-space: nowrap;
+    }
 
     /* ── View switcher ────────────────────────────────── */
-    .view-panel { display: none; }
-    .view-panel.active { display: block; animation: viewIn 0.25s ease; }
-    @keyframes viewIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    .view-panel {
+      display: none;
+    }
+
+    .view-panel.active {
+      display: block;
+      animation: viewIn 0.25s ease;
+    }
+
+    @keyframes viewIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none;
+      }
+    }
 
     /* ── Analytics ────────────────────────────────────── */
-    .chart-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 22px 24px; box-shadow: var(--shadow-md); margin-bottom: 20px; }
-    .chart-card h6 { font-size: 14px; font-weight: 700; margin: 0 0 4px; }
-    .chart-card .sub { font-size: 12px; color: var(--text-muted); margin-bottom: 18px; }
-    .bar-chart { display: flex; align-items: flex-end; gap: 10px; height: 200px; padding: 10px 0 0; border-bottom: 1px solid var(--border); }
-    .bar-chart .bar { flex: 1; background: linear-gradient(to top, var(--green-deep), #6EE7B7); border-radius: 6px 6px 0 0; position: relative; transition: height 0.6s cubic-bezier(0.34,1.56,0.64,1); min-height: 4px; }
-    .bar-chart .bar::after { content: attr(data-v); position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: 10.5px; font-weight: 700; color: var(--text-head); font-family: 'JetBrains Mono', monospace; }
-    .bar-labels { display: flex; gap: 10px; margin-top: 8px; }
-    .bar-labels span { flex: 1; text-align: center; font-size: 11px; color: var(--text-muted); font-weight: 600; }
+    .chart-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 22px 24px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 20px;
+    }
+
+    .chart-card h6 {
+      font-size: 14px;
+      font-weight: 700;
+      margin: 0 0 4px;
+    }
+
+    .chart-card .sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    .bar-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      height: 200px;
+      padding: 10px 0 0;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .bar-chart .bar {
+      flex: 1;
+      background: linear-gradient(to top, var(--green-deep), #6EE7B7);
+      border-radius: 6px 6px 0 0;
+      position: relative;
+      transition: height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      min-height: 4px;
+    }
+
+    .bar-chart .bar::after {
+      content: attr(data-v);
+      position: absolute;
+      top: -18px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--text-head);
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .bar-labels {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .bar-labels span {
+      flex: 1;
+      text-align: center;
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 600;
+    }
 
     /* ── History table ────────────────────────────────── */
-    .data-table { width: 100%; border-collapse: separate; border-spacing: 0; }
-    .data-table thead th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 700; padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg-raised); }
-    .data-table tbody td { padding: 14px 16px; border-bottom: 1px solid var(--border); font-size: 13px; color: var(--text-body); }
-    .data-table tbody tr:hover { background: var(--bg-raised); }
-    .table-wrap { max-height: 520px; overflow-y: auto; border: 1px solid var(--border); border-radius: var(--radius-md); background: var(--bg-card); box-shadow: var(--shadow-md); }
-    .type-chip { display:inline-flex; align-items:center; gap:6px; padding:3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; }
-    .type-plastic { background: var(--green-soft); color: var(--green-deep); }
-    .type-paper   { background: #DBEAFE; color: var(--blue); }
-    .type-organic { background: var(--purple-soft); color: var(--purple); }
+    .data-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+    }
+
+    .data-table thead th {
+      text-align: left;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--text-muted);
+      font-weight: 700;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-raised);
+    }
+
+    .data-table tbody td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+      color: var(--text-body);
+    }
+
+    .data-table tbody tr:hover {
+      background: var(--bg-raised);
+    }
+
+    .table-wrap {
+      max-height: 520px;
+      overflow-y: auto;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      background: var(--bg-card);
+      box-shadow: var(--shadow-md);
+    }
+
+    .type-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .type-plastic {
+      background: var(--green-soft);
+      color: var(--green-deep);
+    }
+
+    .type-paper {
+      background: #DBEAFE;
+      color: var(--blue);
+    }
+
+    .type-organic {
+      background: var(--purple-soft);
+      color: var(--purple);
+    }
 
     /* ── Devices ──────────────────────────────────────── */
-    .device-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px 22px; box-shadow: var(--shadow-md); margin-bottom: 20px; }
-    .device-card .dev-head { display:flex; align-items:center; justify-content:space-between; margin-bottom: 14px; }
-    .device-card h6 { font-size: 15px; font-weight: 700; margin:0; }
-    .dev-row { display:flex; justify-content: space-between; padding: 8px 0; font-size: 12.5px; border-bottom: 1px dashed var(--border); }
-    .dev-row:last-child { border-bottom: none; }
-    .dev-row .k { color: var(--text-muted); font-weight: 500; }
-    .dev-row .v { color: var(--text-head); font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+    .device-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 20px 22px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 20px;
+    }
+
+    .device-card .dev-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .device-card h6 {
+      font-size: 15px;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .dev-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      font-size: 12.5px;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .dev-row:last-child {
+      border-bottom: none;
+    }
+
+    .dev-row .k {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .dev-row .v {
+      color: var(--text-head);
+      font-weight: 600;
+      font-family: 'JetBrains Mono', monospace;
+    }
 
     /* ── Settings ─────────────────────────────────────── */
-    .settings-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 26px 28px; box-shadow: var(--shadow-md); margin-bottom: 18px; }
-    .settings-card h6 { font-size: 15px; font-weight: 700; margin: 0 0 4px; }
-    .settings-card .sub { font-size: 12px; color: var(--text-muted); margin-bottom: 20px; }
-    .form-row { display:flex; align-items:center; justify-content:space-between; padding: 14px 0; border-bottom: 1px solid var(--border); gap: 20px; }
-    .form-row:last-child { border-bottom: none; }
-    .form-row label { font-size: 13px; font-weight: 600; color: var(--text-head); flex: 1; }
-    .form-row .hint { font-size: 11.5px; color: var(--text-muted); font-weight: 400; margin-top: 2px; display:block; }
-    .form-row input[type="text"], .form-row input[type="number"] {
-      background: var(--bg-raised); border: 1px solid var(--border); color: var(--text-head);
-      border-radius: var(--radius-sm); padding: 8px 12px; font-size: 13px; min-width: 240px; font-family: 'JetBrains Mono', monospace;
+    .settings-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 26px 28px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 18px;
+    }
+
+    .settings-card h6 {
+      font-size: 15px;
+      font-weight: 700;
+      margin: 0 0 4px;
+    }
+
+    .settings-card .sub {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .form-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      gap: 20px;
+    }
+
+    .form-row:last-child {
+      border-bottom: none;
+    }
+
+    .form-row label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-head);
+      flex: 1;
+    }
+
+    .form-row .hint {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      font-weight: 400;
+      margin-top: 2px;
+      display: block;
+    }
+
+    .form-row input[type="text"],
+    .form-row input[type="number"] {
+      background: var(--bg-raised);
+      border: 1px solid var(--border);
+      color: var(--text-head);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      font-size: 13px;
+      min-width: 240px;
+      font-family: 'JetBrains Mono', monospace;
       transition: border-color 0.15s, box-shadow 0.15s;
     }
-    .form-row input:focus { outline: none; border-color: var(--green); box-shadow: 0 0 0 3px rgba(16,185,129,0.15); }
-    .toggle { position: relative; display: inline-block; width: 44px; height: 24px; }
-    .toggle input { opacity: 0; width: 0; height: 0; }
-    .toggle .slider { position: absolute; inset:0; background: var(--border-strong); border-radius: 24px; cursor: pointer; transition: 0.2s; }
-    .toggle .slider::before { content:''; position: absolute; height: 18px; width: 18px; left: 3px; top: 3px; background:#fff; border-radius: 50%; transition: 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.2); }
-    .toggle input:checked + .slider { background: var(--green); }
-    .toggle input:checked + .slider::before { transform: translateX(20px); }
-    .btn-save { background: var(--green); color: #fff; border: none; padding: 10px 22px; border-radius: var(--radius-sm); font-weight: 600; font-size: 13px; cursor: pointer; transition: 0.15s; box-shadow: var(--shadow-glow); }
-    .btn-save:hover { background: var(--green-deep); }
+
+    .form-row input:focus {
+      outline: none;
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+    }
+
+    .toggle {
+      position: relative;
+      display: inline-block;
+      width: 44px;
+      height: 24px;
+    }
+
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle .slider {
+      position: absolute;
+      inset: 0;
+      background: var(--border-strong);
+      border-radius: 24px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .toggle .slider::before {
+      content: '';
+      position: absolute;
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      top: 3px;
+      background: #fff;
+      border-radius: 50%;
+      transition: 0.2s;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .toggle input:checked+.slider {
+      background: var(--green);
+    }
+
+    .toggle input:checked+.slider::before {
+      transform: translateX(20px);
+    }
+
+    .btn-save {
+      background: var(--green);
+      color: #fff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.15s;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .btn-save:hover {
+      background: var(--green-deep);
+    }
 
     /* ── Mobile Queries (Responsive Overlay) ──────────────── */
-@media (max-width: 900px) {
-      .sidebar { 
+    @media (max-width: 900px) {
+      .sidebar {
         transform: translateX(-100%);
         transition: transform 0.3s ease;
       }
+
       .sidebar.show {
         transform: translateX(0);
-        box-shadow: 0 0 20px rgba(0,0,0,0.15);
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
       }
-      .dash-main { margin-left: 0; }
-      
+
+      .dash-main {
+        margin-left: 0;
+      }
+
       /* Align topbar content properly on mobile view */
-      .topbar { 
-        padding: 16px 20px; 
+      .topbar {
+        padding: 16px 20px;
         flex-direction: column;
         align-items: flex-start;
         gap: 12px;
       }
+
       .topbar-right {
         width: 100%;
         justify-content: space-between;
@@ -532,15 +1166,38 @@
         padding-top: 8px;
       }
     }
-    
+
     @media (max-width: 600px) {
+
       /* Add bottom padding to prevent content from being cut off by mobile browser nav bars */
-      .dash-body { 
-        padding: 16px 16px 80px 16px; 
+      .dash-body {
+        padding: 16px 16px 80px 16px;
       }
-      .form-row { flex-direction: column; align-items: flex-start; }
-      .realtime-clock { display: none; }
-      
+
+      .form-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      /* Display clock nicely on mobile screen widths */
+      .realtime-clock {
+        min-width: auto;
+        padding: 4px 10px;
+        align-items: center;
+        flex-direction: row;
+        gap: 8px;
+      }
+
+      .rt-date {
+        font-size: 10px;
+        border-right: 1px solid var(--border-strong);
+        padding-right: 8px;
+      }
+
+      .rt-time {
+        font-size: 14px;
+      }
+
       /* Reduce font size slightly to prevent uptime text overflow */
       .stat-card .stat-value {
         font-size: 24px;
@@ -548,470 +1205,522 @@
     }
   </style>
 </head>
+
 <body>
 
-<div class="dash-shell">
+  <div class="dash-shell">
 
-  <!-- ── Sidebar ─────────────────────────────────── -->
-  <aside class="sidebar">
-    <div class="sidebar-logo">
-      <div class="logo-mark"><i class="bi bi-recycle"></i></div>
-      <h5>SmartBin</h5>
-      <small>Waste Management</small>
-    </div>
-
-    <div class="nav-section-label">Monitor</div>
-    <nav class="sidebar-nav nav flex-column" id="sideNav">
-      <a class="nav-link active" href="#" data-view="dashboard" data-title="Live Monitor" data-sub="Real-time bin telemetry & alerts"><i class="bi bi-speedometer2"></i> Dashboard</a>
-      <a class="nav-link" href="#" data-view="analytics" data-title="Analytics" data-sub="Waste production & capacity trends"><i class="bi bi-bar-chart"></i> Analytics</a>
-      <a class="nav-link" href="#" data-view="alerts" data-title="Alerts" data-sub="Active & resolved system signals"><i class="bi bi-bell"></i> Alerts</a>
-      <a class="nav-link" href="#" data-view="history" data-title="History" data-sub="Past collections & waste log"><i class="bi bi-clock-history"></i> History</a>
-    </nav>
-
-    <div class="nav-section-label" style="margin-top:22px;">System</div>
-    <nav class="sidebar-nav nav flex-column" id="sideNav2">
-      <a class="nav-link" href="#" data-view="devices" data-title="Devices" data-sub="ESP32 nodes & connectivity"><i class="bi bi-cpu"></i> Devices</a>
-      <a class="nav-link" href="#" data-view="settings" data-title="Settings" data-sub="Thresholds, endpoints & notifications"><i class="bi bi-gear"></i> Settings</a>
-    </nav>
-
-    <div class="sidebar-footer">
-      <div id="connStatus" class="conn-pill offline">
-        <span class="conn-dot pulse"></span>
-        <span id="connText">Connecting...</span>
+    <!-- ── Sidebar ─────────────────────────────────── -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-mark"><i class="bi bi-recycle"></i></div>
+        <h5>SmartBin</h5>
+        <small>Waste Management</small>
       </div>
-    </div>
-  </aside>
 
-  <!-- ── Main ─────────────────────────────────────── -->
-  <main class="dash-main">
+      <div class="nav-section-label">Monitor</div>
+      <nav class="sidebar-nav nav flex-column" id="sideNav">
+        <a class="nav-link active" href="#" data-view="dashboard" data-title="Live Monitor"
+          data-sub="Real-time bin telemetry & alerts"><i class="bi bi-speedometer2"></i> Dashboard</a>
+        <a class="nav-link" href="#" data-view="analytics" data-title="Analytics"
+          data-sub="Waste production & capacity trends"><i class="bi bi-bar-chart"></i> Analytics</a>
+        <a class="nav-link" href="#" data-view="alerts" data-title="Alerts"
+          data-sub="Active & resolved system signals"><i class="bi bi-bell"></i> Alerts</a>
+        <a class="nav-link" href="#" data-view="history" data-title="History" data-sub="Past collections & waste log"><i
+            class="bi bi-clock-history"></i> History</a>
+      </nav>
 
-    <!-- Top bar -->
-    <div class="topbar">
-      <div class="d-flex align-items-center gap-3">
-        <!-- ဖိုန်းဗားရှင်းအတွက် Hamburger Button -->
-        <button class="btn btn-light d-lg-none" id="menuToggleBtn" style="border:1px solid var(--border)">
-          <i class="bi bi-list" style="font-size: 20px;"></i>
-        </button>
-        <div>
-          <h1 class="topbar-title" id="viewTitle">Live Monitor</h1>
-          <div class="topbar-subtitle" id="viewSubtitle">Real-time bin telemetry &amp; alerts</div>
+      <div class="nav-section-label" style="margin-top:22px;">System</div>
+      <nav class="sidebar-nav nav flex-column" id="sideNav2">
+        <a class="nav-link" href="#" data-view="devices" data-title="Devices" data-sub="ESP32 nodes & connectivity"><i
+            class="bi bi-cpu"></i> Devices</a>
+        <a class="nav-link" href="#" data-view="settings" data-title="Settings"
+          data-sub="Thresholds, endpoints & notifications"><i class="bi bi-gear"></i> Settings</a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div id="connStatus" class="conn-pill offline">
+          <span class="conn-dot pulse"></span>
+          <span id="connText">Connecting...</span>
         </div>
       </div>
-      <div class="topbar-right">
-        <div class="last-sync">Last sync: <span id="lastSync">--:--:--</span></div>
-        <div class="realtime-clock">
-          <div class="rt-date" id="rtDate">—</div>
-          <div class="rt-time" id="rtTime">00:00:00</div>
-        </div>
-      </div>
-    </div>
+    </aside>
 
-    <!-- Body -->
-    <div class="dash-body">
+    <!-- ── Main ─────────────────────────────────────── -->
+    <main class="dash-main">
 
-      <!-- ═══════════ DASHBOARD VIEW ═══════════ -->
-      <section class="view-panel active" id="view-dashboard">
-        <!-- Stat summary -->
-        <div class="row g-3 mb-4">
-          <div class="col-md-3 col-sm-6">
-            <div class="stat-card">
-              <div class="stat-icon icon-green"><i class="bi bi-arrow-down-circle"></i></div>
-              <div class="stat-value" id="totalDeposits">0</div>
-              <div class="stat-label">Total deposits today</div>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <div class="stat-card">
-              <div class="stat-icon icon-amber"><i class="bi bi-exclamation-triangle"></i></div>
-              <div class="stat-value" id="activeAlertCount">0</div>
-              <div class="stat-label">Active alerts</div>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <div class="stat-card">
-              <div class="stat-icon icon-blue"><i class="bi bi-check2-circle"></i></div>
-              <div class="stat-value">3</div>
-              <div class="stat-label">Bins operational</div>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <div class="stat-card">
-              <div class="stat-icon icon-purple"><i class="bi bi-hourglass-split"></i></div>
-              <div class="stat-value" id="systemUptime">00:00:00</div>
-              <div class="stat-label">System uptime</div>
-            </div>
-          </div>
-        </div>
+      <!-- Top bar -->
 
-        <!-- Bins -->
-        <div class="section-label">Bin Status — Real Time</div>
-        <div class="row g-3 mb-4">
-          <!-- PLASTIC -->
-          <div class="col-lg-4 col-md-6">
-            <div class="bin-card" id="card-Plastic">
-              <div class="bin-header">
-                <h5 class="bin-name">♻ Plastic</h5>
-                <span class="bin-status-pill pill-ok" id="pill-Plastic"><i class="bi bi-circle-fill" style="font-size:6px"></i> Normal</span>
-              </div>
-              <div class="bin-cylinder-wrap">
-                <div class="bin-lid" id="lid-Plastic"></div>
-                <div class="bin-cylinder">
-                  <div class="bin-cylinder-fill" id="fill-Plastic"></div>
-                  <div class="bin-pct-label" id="pct-Plastic">0%</div>
-                </div>
-              </div>
-              <div class="fill-bar-track"><div class="fill-bar-fill" id="bar-Plastic"></div></div>
-              <div class="bin-meta">
-                <div class="bin-meta-item"><div class="val" id="taps-Plastic">0</div><div class="lbl">Deposits</div></div>
-                <div class="bin-meta-item"><div class="val" id="fill-val-Plastic">0%</div><div class="lbl">Fill level</div></div>
-              </div>
-              <button class="btn-mark-empty" onclick="sendEmptyCmd('Plastic')"><i class="bi bi-arrow-clockwise"></i> Mark as Emptied</button>
-            </div>
-          </div>
-
-          <!-- PAPER -->
-          <div class="col-lg-4 col-md-6">
-            <div class="bin-card" id="card-Paper">
-              <div class="bin-header">
-                <h5 class="bin-name">📄 Paper</h5>
-                <span class="bin-status-pill pill-ok" id="pill-Paper"><i class="bi bi-circle-fill" style="font-size:6px"></i> Normal</span>
-              </div>
-              <div class="bin-cylinder-wrap">
-                <div class="bin-lid" id="lid-Paper"></div>
-                <div class="bin-cylinder">
-                  <div class="bin-cylinder-fill" id="fill-Paper"></div>
-                  <div class="bin-pct-label" id="pct-Paper">0%</div>
-                </div>
-              </div>
-              <div class="fill-bar-track"><div class="fill-bar-fill" id="bar-Paper"></div></div>
-              <div class="bin-meta">
-                <div class="bin-meta-item"><div class="val" id="taps-Paper">0</div><div class="lbl">Deposits</div></div>
-                <div class="bin-meta-item"><div class="val" id="fill-val-Paper">0%</div><div class="lbl">Fill level</div></div>
-              </div>
-              <button class="btn-mark-empty" onclick="sendEmptyCmd('Paper')"><i class="bi bi-arrow-clockwise"></i> Mark as Emptied</button>
-            </div>
-          </div>
-
-          <!-- ORGANIC -->
-          <div class="col-lg-4 col-md-6">
-            <div class="bin-card" id="card-Organic">
-              <div class="bin-header">
-                <h5 class="bin-name">🌿 Organic</h5>
-                <span class="bin-status-pill pill-ok" id="pill-Organic"><i class="bi bi-circle-fill" style="font-size:6px"></i> Normal</span>
-              </div>
-              <div class="bin-cylinder-wrap">
-                <div class="bin-lid" id="lid-Organic"></div>
-                <div class="bin-cylinder">
-                  <div class="bin-cylinder-fill" id="fill-Organic"></div>
-                  <div class="bin-pct-label" id="pct-Organic">0%</div>
-                </div>
-              </div>
-              <div class="fill-bar-track"><div class="fill-bar-fill" id="bar-Organic"></div></div>
-              <div class="bin-meta">
-                <div class="bin-meta-item"><div class="val" id="taps-Organic">0</div><div class="lbl">Deposits</div></div>
-                <div class="bin-meta-item"><div class="val" id="fill-val-Organic">0%</div><div class="lbl">Fill level</div></div>
-              </div>
-              <button class="btn-mark-empty" onclick="sendEmptyCmd('Organic')"><i class="bi bi-arrow-clockwise"></i> Mark as Emptied</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Alerts & Logs panels -->
-        <div class="row g-3">
-          <div class="col-lg-6">
-            <div class="alert-panel">
-              <div class="panel-header">
-                <span><i class="bi bi-bell-fill me-2" style="color:var(--amber)"></i>Active Alerts</span>
-              </div>
-              <div class="panel-body" id="alertList">
-                <div class="no-alerts">
-                  <i class="bi bi-shield-check"></i>
-                  All bins operating normally.
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <div class="log-panel">
-              <div class="panel-header">
-                <span><i class="bi bi-terminal me-2"></i>Activity Log</span>
-                <span class="live-pill"><span class="conn-dot pulse"></span>Live</span>
-              </div>
-              <div class="panel-body" id="logList" style="max-height: 250px; overflow-y: auto;">
-                <div class="text-muted text-center py-3">Waiting for device activity...</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ═══════════ OTHER SECTIONS ═══════════ -->
-      <section class="view-panel" id="view-analytics">
-        <div class="chart-card">
-          <h6>Weekly Garbage Accumulation</h6>
-          <div class="sub">Total volume per bin category (kg)</div>
-          <div class="bar-chart">
-            <div class="bar" style="height: 65%" data-v="42kg"></div>
-            <div class="bar" style="height: 40%" data-v="28kg"></div>
-            <div class="bar" style="height: 85%" data-v="56kg"></div>
-          </div>
-          <div class="bar-labels">
-            <span>Plastic</span>
-            <span>Paper</span>
-            <span>Organic</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="view-panel" id="view-alerts">
-        <div id="fullAlertLog">
-          <div class="text-muted p-4 text-center">No structural logs recorded yet.</div>
-        </div>
-      </section>
-
-      <section class="view-panel" id="view-history">
-        <div class="table-wrap">
-          <table class="data-table">
-            <thead>
-              <tr>
-                <th>Timestamp</th>
-                <th>Bin Category</th>
-                <th>Event Trigger</th>
-                <th>Status Code</th>
-              </tr>
-            </thead>
-            <tbody id="historyTableBody">
-              <tr>
-                <td colspan="4" class="text-center text-muted py-4">No collection logs available.</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </section>
-
-      <section class="view-panel" id="view-devices">
-        <div class="row g-3">
-          <div class="col-md-6">
-            <div class="device-card">
-              <div class="dev-head">
-                <h6>ESP32 Primary Node</h6>
-                <span class="badge bg-success">Active</span>
-              </div>
-              <div class="dev-row"><span class="k">IP Address</span><span class="v" id="devIp">11.0.0.1</span></div>
-              <div class="dev-row"><span class="k">MAC Address</span><span class="v">24:0A:C4:B8:58:A2</span></div>
-              <div class="dev-row"><span class="k">Wi-Fi RSSI</span><span class="v">-58 dBm</span></div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="view-panel" id="view-settings">
-        <div class="settings-card">
-          <h6>Threshold Configurations</h6>
-          <div class="sub">Adjust parameters for ultrasonic sensors</div>
-          <div class="form-row">
+      <div class="topbar">
+        <div class="d-flex align-items-center justify-content-between w-100 flex-wrap gap-2">
+          <div class="d-flex align-items-center gap-2">
+            <!-- Hamburger Button for mobile -->
+            <button class="btn btn-light d-lg-none" id="menuToggleBtn"
+              style="border:1px solid var(--border); padding: 4px 10px;">
+              <i class="bi bi-list" style="font-size: 18px;"></i>
+            </button>
             <div>
-              <label>Critical Capacity Alert (%)</label>
-              <span class="hint">Trigger alert state when fill level crosses this value.</span>
+              <!-- Main Brand Name appears first on mobile now -->
+              <div class="d-flex align-items-center gap-2">
+                <span class="fw-bold text-success d-lg-none"
+                  style="font-family:'Space Grotesk'; font-size:16px;">SmartBin</span>
+                <span class="text-muted d-lg-none" style="font-size:14px;">|</span>
+                <h1 class="topbar-title" id="viewTitle" style="font-size: 16px; font-weight: 700;">Live Monitor</h1>
+              </div>
+              <div class="topbar-subtitle d-none d-sm-block" id="viewSubtitle" style="font-size: 12px;">Real-time bin
+                telemetry &amp; alerts</div>
             </div>
-            <input type="number" id="cfgAlertThreshold" value="85" max="100" min="50"/>
           </div>
-          <div class="form-row">
-            <div>
-              <label>Auto-Lock Servo Mechanism</label>
-              <span class="hint">Automatically secure lid when bin becomes completely full.</span>
-            </div>
-            <label class="toggle">
-              <input type="checkbox" id="cfgAutoLock" checked/>
-              <span class="slider"></span>
-            </label>
-          </div>
-          <div class="mt-4 text-end">
-            <button class="btn-save" onclick="saveSettings()">Save Configuration</button>
+
+          <!-- Live Realtime Clock visible on all devices -->
+          <div class="realtime-clock">
+            <div class="rt-date" id="rtDate">—</div>
+            <div class="rt-time" id="rtTime">00:00:00</div>
           </div>
         </div>
-      </section>
 
-    </div>
-  </main>
-</div>
+        <div class="topbar-right">
+          <div class="last-sync">Last sync: <span id="lastSync">--:--:--</span></div>
+        </div>
+      </div>
 
-<!-- ═══════════ JAVASCRIPT LOGIC ═══════════ -->
-<script>
-  let gateway = `ws://${window.location.hostname}/ws`;
-  let websocket;
-  let startTime = Date.now();
+      <!-- Body -->
+      <div class="dash-body">
 
-  window.addEventListener('load', initDashboard);
+        <!-- ═══════════ DASHBOARD VIEW ═══════════ -->
+        <section class="view-panel active" id="view-dashboard">
+          <!-- Stat summary -->
+          <div class="row g-3 mb-4">
+            <div class="col-md-3 col-sm-6">
+              <div class="stat-card">
+                <div class="stat-icon icon-green"><i class="bi bi-arrow-down-circle"></i></div>
+                <div class="stat-value" id="totalDeposits">0</div>
+                <div class="stat-label">Total deposits today</div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <div class="stat-card">
+                <div class="stat-icon icon-amber"><i class="bi bi-exclamation-triangle"></i></div>
+                <div class="stat-value" id="activeAlertCount">0</div>
+                <div class="stat-label">Active alerts</div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <div class="stat-card">
+                <div class="stat-icon icon-blue"><i class="bi bi-check2-circle"></i></div>
+                <div class="stat-value">3</div>
+                <div class="stat-label">Bins operational</div>
+              </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+              <div class="stat-card">
+                <div class="stat-icon icon-purple"><i class="bi bi-hourglass-split"></i></div>
+                <div class="stat-value" id="systemUptime">00:00:00</div>
+                <div class="stat-label">System uptime</div>
+              </div>
+            </div>
+          </div>
 
-  function initDashboard() {
-    initClock();
-    initNavigation();
-    initWebSocket();
-    initMobileMenu(); // Mobile Hamburger Trigger
-    setInterval(updateUptime, 1000);
-  }
+          <!-- Bins -->
+          <div class="section-label">Bin Status — Real Time</div>
+          <div class="row g-3 mb-4">
+            <!-- PLASTIC -->
+            <div class="col-lg-4 col-md-6">
+              <div class="bin-card" id="card-Plastic">
+                <div class="bin-header">
+                  <h5 class="bin-name">♻ Plastic</h5>
+                  <span class="bin-status-pill pill-ok" id="pill-Plastic"><i class="bi bi-circle-fill"
+                      style="font-size:6px"></i> Normal</span>
+                </div>
+                <div class="bin-cylinder-wrap">
+                  <div class="bin-lid" id="lid-Plastic"></div>
+                  <div class="bin-cylinder">
+                    <div class="bin-cylinder-fill" id="fill-Plastic"></div>
+                    <div class="bin-pct-label" id="pct-Plastic">0%</div>
+                  </div>
+                </div>
+                <div class="fill-bar-track">
+                  <div class="fill-bar-fill" id="bar-Plastic"></div>
+                </div>
+                <div class="bin-meta">
+                  <div class="bin-meta-item">
+                    <div class="val" id="taps-Plastic">0</div>
+                    <div class="lbl">Deposits</div>
+                  </div>
+                  <div class="bin-meta-item">
+                    <div class="val" id="fill-val-Plastic">0%</div>
+                    <div class="lbl">Fill level</div>
+                  </div>
+                </div>
+                <button class="btn-mark-empty" onclick="sendEmptyCmd('Plastic')"><i class="bi bi-arrow-clockwise"></i>
+                  Mark as Emptied</button>
+              </div>
+            </div>
 
-  function initClock() {
-    const rtTime = document.getElementById('rtTime');
-    const rtDate = document.getElementById('rtDate');
-    
-    function tick() {
-      const now = new Date();
-      rtTime.textContent = now.toTimeString().split(' ')[0];
-      rtDate.textContent = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+            <!-- PAPER -->
+            <div class="col-lg-4 col-md-6">
+              <div class="bin-card" id="card-Paper">
+                <div class="bin-header">
+                  <h5 class="bin-name">📄 Paper</h5>
+                  <span class="bin-status-pill pill-ok" id="pill-Paper"><i class="bi bi-circle-fill"
+                      style="font-size:6px"></i> Normal</span>
+                </div>
+                <div class="bin-cylinder-wrap">
+                  <div class="bin-lid" id="lid-Paper"></div>
+                  <div class="bin-cylinder">
+                    <div class="bin-cylinder-fill" id="fill-Paper"></div>
+                    <div class="bin-pct-label" id="pct-Paper">0%</div>
+                  </div>
+                </div>
+                <div class="fill-bar-track">
+                  <div class="fill-bar-fill" id="bar-Paper"></div>
+                </div>
+                <div class="bin-meta">
+                  <div class="bin-meta-item">
+                    <div class="val" id="taps-Paper">0</div>
+                    <div class="lbl">Deposits</div>
+                  </div>
+                  <div class="bin-meta-item">
+                    <div class="val" id="fill-val-Paper">0%</div>
+                    <div class="lbl">Fill level</div>
+                  </div>
+                </div>
+                <button class="btn-mark-empty" onclick="sendEmptyCmd('Paper')"><i class="bi bi-arrow-clockwise"></i>
+                  Mark as Emptied</button>
+              </div>
+            </div>
+
+            <!-- ORGANIC -->
+            <div class="col-lg-4 col-md-6">
+              <div class="bin-card" id="card-Organic">
+                <div class="bin-header">
+                  <h5 class="bin-name">🌿 Organic</h5>
+                  <span class="bin-status-pill pill-ok" id="pill-Organic"><i class="bi bi-circle-fill"
+                      style="font-size:6px"></i> Normal</span>
+                </div>
+                <div class="bin-cylinder-wrap">
+                  <div class="bin-lid" id="lid-Organic"></div>
+                  <div class="bin-cylinder">
+                    <div class="bin-cylinder-fill" id="fill-Organic"></div>
+                    <div class="bin-pct-label" id="pct-Organic">0%</div>
+                  </div>
+                </div>
+                <div class="fill-bar-track">
+                  <div class="fill-bar-fill" id="bar-Organic"></div>
+                </div>
+                <div class="bin-meta">
+                  <div class="bin-meta-item">
+                    <div class="val" id="taps-Organic">0</div>
+                    <div class="lbl">Deposits</div>
+                  </div>
+                  <div class="bin-meta-item">
+                    <div class="val" id="fill-val-Organic">0%</div>
+                    <div class="lbl">Fill level</div>
+                  </div>
+                </div>
+                <button class="btn-mark-empty" onclick="sendEmptyCmd('Organic')"><i class="bi bi-arrow-clockwise"></i>
+                  Mark as Emptied</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Alerts & Logs panels -->
+          <div class="row g-3">
+            <div class="col-lg-6">
+              <div class="alert-panel">
+                <div class="panel-header">
+                  <span><i class="bi bi-bell-fill me-2" style="color:var(--amber)"></i>Active Alerts</span>
+                </div>
+                <div class="panel-body" id="alertList">
+                  <div class="no-alerts">
+                    <i class="bi bi-shield-check"></i>
+                    All bins operating normally.
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="log-panel">
+                <div class="panel-header">
+                  <span><i class="bi bi-terminal me-2"></i>Activity Log</span>
+                  <span class="live-pill"><span class="conn-dot pulse"></span>Live</span>
+                </div>
+                <div class="panel-body" id="logList" style="max-height: 250px; overflow-y: auto;">
+                  <div class="text-muted text-center py-3">Waiting for device activity...</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ═══════════ OTHER SECTIONS ═══════════ -->
+        <section class="view-panel" id="view-analytics">
+          <div class="chart-card">
+            <h6>Weekly Garbage Accumulation</h6>
+            <div class="sub">Total volume per bin category (kg)</div>
+            <div class="bar-chart">
+              <div class="bar" style="height: 65%" data-v="42kg"></div>
+              <div class="bar" style="height: 40%" data-v="28kg"></div>
+              <div class="bar" style="height: 85%" data-v="56kg"></div>
+            </div>
+            <div class="bar-labels">
+              <span>Plastic</span>
+              <span>Paper</span>
+              <span>Organic</span>
+            </div>
+          </div>
+        </section>
+
+        <section class="view-panel" id="view-alerts">
+          <div id="fullAlertLog">
+            <div class="text-muted p-4 text-center">No structural logs recorded yet.</div>
+          </div>
+        </section>
+
+        <section class="view-panel" id="view-history">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Timestamp</th>
+                  <th>Bin Category</th>
+                  <th>Event Trigger</th>
+                  <th>Status Code</th>
+                </tr>
+              </thead>
+              <tbody id="historyTableBody">
+                <tr>
+                  <td colspan="4" class="text-center text-muted py-4">No collection logs available.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="view-panel" id="view-devices">
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="device-card">
+                <div class="dev-head">
+                  <h6>ESP32 Primary Node</h6>
+                  <span class="badge bg-success">Active</span>
+                </div>
+                <div class="dev-row"><span class="k">IP Address</span><span class="v" id="devIp">11.0.0.1</span></div>
+                <div class="dev-row"><span class="k">MAC Address</span><span class="v">24:0A:C4:B8:58:A2</span></div>
+                <div class="dev-row"><span class="k">Wi-Fi RSSI</span><span class="v">-58 dBm</span></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view-panel" id="view-settings">
+          <div class="settings-card">
+            <h6>Threshold Configurations</h6>
+            <div class="sub">Adjust parameters for ultrasonic sensors</div>
+            <div class="form-row">
+              <div>
+                <label>Critical Capacity Alert (%)</label>
+                <span class="hint">Trigger alert state when fill level crosses this value.</span>
+              </div>
+              <input type="number" id="cfgAlertThreshold" value="85" max="100" min="50" />
+            </div>
+            <div class="form-row">
+              <div>
+                <label>Auto-Lock Servo Mechanism</label>
+                <span class="hint">Automatically secure lid when bin becomes completely full.</span>
+              </div>
+              <label class="toggle">
+                <input type="checkbox" id="cfgAutoLock" checked />
+                <span class="slider"></span>
+              </label>
+            </div>
+            <div class="mt-4 text-end">
+              <button class="btn-save" onclick="saveSettings()">Save Configuration</button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <!-- ═══════════ JAVASCRIPT LOGIC ═══════════ -->
+  <script>
+    let gateway = `ws://${window.location.hostname}/ws`;
+    let websocket;
+    let startTime = Date.now();
+
+    window.addEventListener('load', initDashboard);
+
+    function initDashboard() {
+      initClock();
+      initNavigation();
+      initWebSocket();
+      initMobileMenu(); // Mobile Hamburger Trigger
+      setInterval(updateUptime, 1000);
     }
-    setInterval(tick, 1000);
-    tick();
-  }
 
-  function initNavigation() {
-    const links = document.querySelectorAll('.sidebar-nav .nav-link');
-    links.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        links.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
+    function initClock() {
+      const rtTime = document.getElementById('rtTime');
+      const rtDate = document.getElementById('rtDate');
 
-        const targetView = link.getAttribute('data-view');
-        document.querySelectorAll('.view-panel').forEach(panel => panel.classList.remove('active'));
-        document.getElementById(`view-${targetView}`).classList.add('active');
+      function tick() {
+        const now = new Date();
+        rtTime.textContent = now.toTimeString().split(' ')[0];
+        rtDate.textContent = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+      }
+      setInterval(tick, 1000);
+      tick();
+    }
 
-        document.getElementById('viewTitle').textContent = link.getAttribute('data-title');
-        document.getElementById('viewSubtitle').textContent = link.getAttribute('data-sub');
-      });
-    });
-  }
+    function initNavigation() {
+      const links = document.querySelectorAll('.sidebar-nav .nav-link');
+      links.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          links.forEach(l => l.classList.remove('active'));
+          link.classList.add('active');
 
-  function initMobileMenu() {
-    const toggleBtn = document.getElementById('menuToggleBtn');
-    const sidebar = document.querySelector('.sidebar');
-    const navLinks = document.querySelectorAll('.sidebar-nav .nav-link');
+          const targetView = link.getAttribute('data-view');
+          document.querySelectorAll('.view-panel').forEach(panel => panel.classList.remove('active'));
+          document.getElementById(`view-${targetView}`).classList.add('active');
 
-    if(toggleBtn && sidebar) {
-      toggleBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        sidebar.classList.toggle('show');
-      });
-
-      document.addEventListener('click', (e) => {
-        if (!sidebar.contains(e.target) && sidebar.classList.contains('show')) {
-          sidebar.classList.remove('show');
-        }
-      });
-
-      navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-          sidebar.classList.remove('show');
+          document.getElementById('viewTitle').textContent = link.getAttribute('data-title');
+          document.getElementById('viewSubtitle').textContent = link.getAttribute('data-sub');
         });
       });
     }
-  }
 
-  function initWebSocket() {
-    console.log('Attempting WebSocket connection...');
-    websocket = new WebSocket(gateway);
-    websocket.onopen = onOpen;
-    websocket.onclose = onClose;
-    websocket.onmessage = onMessage;
-  }
+    function initMobileMenu() {
+      const toggleBtn = document.getElementById('menuToggleBtn');
+      const sidebar = document.querySelector('.sidebar');
+      const navLinks = document.querySelectorAll('.sidebar-nav .nav-link');
 
-  function onOpen(event) {
-    const connStatus = document.getElementById('connStatus');
-    const connText = document.getElementById('connText');
-    connStatus.className = 'conn-pill online';
-    connText.textContent = 'ESP32 Online';
-    document.getElementById('devIp').textContent = window.location.hostname || '11.0.0.1';
-  }
+      if (toggleBtn && sidebar) {
+        toggleBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          sidebar.classList.toggle('show');
+        });
 
-  function onClose(event) {
-    const connStatus = document.getElementById('connStatus');
-    const connText = document.getElementById('connText');
-    connStatus.className = 'conn-pill offline';
-    connText.textContent = 'Connecting...';
-    setTimeout(initWebSocket, 2000);
-  }
+        document.addEventListener('click', (e) => {
+          if (!sidebar.contains(e.target) && sidebar.classList.contains('show')) {
+            sidebar.classList.remove('show');
+          }
+        });
 
-  function onMessage(event) {
-    try {
-      const data = JSON.parse(event.data);
-      document.getElementById('lastSync').textContent = new Date().toTimeString().split(' ')[0];
-      
-      if(data.type === 'telemetry') {
-        updateBinUI(data.bin, data.fillLevel, data.deposits, data.isOpen);
+        navLinks.forEach(link => {
+          link.addEventListener('click', () => {
+            sidebar.classList.remove('show');
+          });
+        });
       }
-      if(data.system) {
-        document.getElementById('totalDeposits').textContent = data.system.totalDeposits || '0';
-        document.getElementById('activeAlertCount').textContent = data.system.activeAlerts || '0';
+    }
+
+    function initWebSocket() {
+      console.log('Attempting WebSocket connection...');
+      websocket = new WebSocket(gateway);
+      websocket.onopen = onOpen;
+      websocket.onclose = onClose;
+      websocket.onmessage = onMessage;
+    }
+
+    function onOpen(event) {
+      const connStatus = document.getElementById('connStatus');
+      const connText = document.getElementById('connText');
+      connStatus.className = 'conn-pill online';
+      connText.textContent = 'ESP32 Online';
+      document.getElementById('devIp').textContent = window.location.hostname || '11.0.0.1';
+    }
+
+    function onClose(event) {
+      const connStatus = document.getElementById('connStatus');
+      const connText = document.getElementById('connText');
+      connStatus.className = 'conn-pill offline';
+      connText.textContent = 'Connecting...';
+      setTimeout(initWebSocket, 2000);
+    }
+
+    function onMessage(event) {
+      try {
+        const data = JSON.parse(event.data);
+        document.getElementById('lastSync').textContent = new Date().toTimeString().split(' ')[0];
+
+        if (data.type === 'telemetry') {
+          updateBinUI(data.bin, data.fillLevel, data.deposits, data.isOpen);
+        }
+        if (data.system) {
+          document.getElementById('totalDeposits').textContent = data.system.totalDeposits || '0';
+          document.getElementById('activeAlertCount').textContent = data.system.activeAlerts || '0';
+        }
+      } catch (err) {
+        console.error('Error parsing WS message:', err);
       }
-    } catch (err) {
-      console.error('Error parsing WS message:', err);
     }
-  }
 
-  function updateBinUI(binName, fill, deposits, isOpen) {
-    const fillEl = document.getElementById(`fill-${binName}`);
-    const barEl = document.getElementById(`bar-${binName}`);
-    const pctEl = document.getElementById(`pct-${binName}`);
-    const valEl = document.getElementById(`fill-val-${binName}`);
-    const tapsEl = document.getElementById(`taps-${binName}`);
-    const lidEl = document.getElementById(`lid-${binName}`);
-    const pillEl = document.getElementById(`pill-${binName}`);
-    const cardEl = document.getElementById(`card-${binName}`);
+    function updateBinUI(binName, fill, deposits, isOpen) {
+      const fillEl = document.getElementById(`fill-${binName}`);
+      const barEl = document.getElementById(`bar-${binName}`);
+      const pctEl = document.getElementById(`pct-${binName}`);
+      const valEl = document.getElementById(`fill-val-${binName}`);
+      const tapsEl = document.getElementById(`taps-${binName}`);
+      const lidEl = document.getElementById(`lid-${binName}`);
+      const pillEl = document.getElementById(`pill-${binName}`);
+      const cardEl = document.getElementById(`card-${binName}`);
 
-    if(!fillEl) return;
+      if (!fillEl) return;
 
-    fillEl.style.height = `${fill}%`;
-    barEl.style.width = `${fill}%`;
-    pctEl.textContent = `${fill}%`;
-    valEl.textContent = `${fill}%`;
-    tapsEl.textContent = deposits;
+      fillEl.style.height = `${fill}%`;
+      barEl.style.width = `${fill}%`;
+      pctEl.textContent = `${fill}%`;
+      valEl.textContent = `${fill}%`;
+      tapsEl.textContent = deposits;
 
-    if(isOpen) lidEl.classList.add('open');
-    else lidEl.classList.remove('open');
+      if (isOpen) lidEl.classList.add('open');
+      else lidEl.classList.remove('open');
 
-    if(fill >= 85) {
-      fillEl.style.background = 'linear-gradient(to top, #DC2626, #EF4444)';
-      pillEl.className = 'bin-status-pill pill-locked';
-      pillEl.innerHTML = `<i class="bi bi-lock-fill"></i> Full`;
-      cardEl.classList.add('full-alert');
-    } else if (fill >= 65) {
-      fillEl.style.background = 'linear-gradient(to top, #D97706, #F59E0B)';
-      pillEl.className = 'bin-status-pill pill-warn';
-      pillEl.innerHTML = `<i class="bi bi-exclamation-triangle-fill"></i> Warning`;
-      cardEl.classList.remove('full-alert');
-    } else {
-      fillEl.style.background = 'linear-gradient(to top, var(--green-deep), var(--green))';
-      pillEl.className = 'bin-status-pill pill-ok';
-      pillEl.innerHTML = `<i class="bi bi-circle-fill" style="font-size:6px"></i> Normal`;
-      cardEl.classList.remove('full-alert');
+      if (fill >= 85) {
+        fillEl.style.background = 'linear-gradient(to top, #DC2626, #EF4444)';
+        pillEl.className = 'bin-status-pill pill-locked';
+        pillEl.innerHTML = `<i class="bi bi-lock-fill"></i> Full`;
+        cardEl.classList.add('full-alert');
+      } else if (fill >= 65) {
+        fillEl.style.background = 'linear-gradient(to top, #D97706, #F59E0B)';
+        pillEl.className = 'bin-status-pill pill-warn';
+        pillEl.innerHTML = `<i class="bi bi-exclamation-triangle-fill"></i> Warning`;
+        cardEl.classList.remove('full-alert');
+      } else {
+        fillEl.style.background = 'linear-gradient(to top, var(--green-deep), var(--green))';
+        pillEl.className = 'bin-status-pill pill-ok';
+        pillEl.innerHTML = `<i class="bi bi-circle-fill" style="font-size:6px"></i> Normal`;
+        cardEl.classList.remove('full-alert');
+      }
     }
-  }
 
-  function sendEmptyCmd(binName) {
-    if(websocket && websocket.readyState === WebSocket.OPEN) {
-      websocket.send(JSON.stringify({ command: 'empty', bin: binName }));
-      updateBinUI(binName, 0, 0, false);
+    function sendEmptyCmd(binName) {
+      if (websocket && websocket.readyState === WebSocket.OPEN) {
+        websocket.send(JSON.stringify({ command: 'empty', bin: binName }));
+        updateBinUI(binName, 0, 0, false);
+      }
     }
-  }
 
-  function saveSettings() {
-    const threshold = document.getElementById('cfgAlertThreshold').value;
-    const autolock = document.getElementById('cfgAutoLock').checked;
-    if(websocket && websocket.readyState === WebSocket.OPEN) {
-      websocket.send(JSON.stringify({ command: 'settings', threshold: threshold, autoLock: autolock }));
-      alert('Configuration targets dispatched to ESP32 node.');
+    function saveSettings() {
+      const threshold = document.getElementById('cfgAlertThreshold').value;
+      const autolock = document.getElementById('cfgAutoLock').checked;
+      if (websocket && websocket.readyState === WebSocket.OPEN) {
+        websocket.send(JSON.stringify({ command: 'settings', threshold: threshold, autoLock: autolock }));
+        alert('Configuration targets dispatched to ESP32 node.');
+      }
     }
-  }
 
-  function updateUptime() {
-    const diff = Date.now() - startTime;
-    const hrs = String(Math.floor(diff / 3600000)).padStart(2, '0');
-    const mins = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-    const secs = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-    document.getElementById('systemUptime').textContent = `${hrs}:${mins}:${secs}`;
-  }
-</script>
+    function updateUptime() {
+      const diff = Date.now() - startTime;
+      const hrs = String(Math.floor(diff / 3600000)).padStart(2, '0');
+      const mins = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+      const secs = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+      document.getElementById('systemUptime').textContent = `${hrs}:${mins}:${secs}`;
+    }
+  </script>
 
 </body>
+
 </html>
