@@ -507,7 +507,7 @@
     .btn-save:hover { background: var(--green-deep); }
 
     /* ── Mobile Queries (Responsive Overlay) ──────────────── */
-    @media (max-width: 900px) {
+@media (max-width: 900px) {
       .sidebar { 
         transform: translateX(-100%);
         transition: transform 0.3s ease;
@@ -517,12 +517,34 @@
         box-shadow: 0 0 20px rgba(0,0,0,0.15);
       }
       .dash-main { margin-left: 0; }
-      .topbar { padding: 16px 20px; }
+      
+      /* Align topbar content properly on mobile view */
+      .topbar { 
+        padding: 16px 20px; 
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .topbar-right {
+        width: 100%;
+        justify-content: space-between;
+        border-top: 1px solid var(--border);
+        padding-top: 8px;
+      }
     }
+    
     @media (max-width: 600px) {
-      .dash-body { padding: 18px; }
+      /* Add bottom padding to prevent content from being cut off by mobile browser nav bars */
+      .dash-body { 
+        padding: 16px 16px 80px 16px; 
+      }
       .form-row { flex-direction: column; align-items: flex-start; }
-      .realtime-clock { display: none; } /* ဖိုန်းမှာ နေရာချွေတာရန် */
+      .realtime-clock { display: none; }
+      
+      /* Reduce font size slightly to prevent uptime text overflow */
+      .stat-card .stat-value {
+        font-size: 24px;
+      }
     }
   </style>
 </head>
