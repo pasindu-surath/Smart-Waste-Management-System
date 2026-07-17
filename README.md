@@ -2,7 +2,7 @@
 
 A modern, real-time IoT Waste Management Dashboard developed for monitoring smart dustbins. This system establishes a live connection with an ESP32 microcontroller over WebSockets to provide dynamic visual updates, capacity tracking, and remote control capabilities.
 
-🔗 **Live Demo:** [https://pasindusurath.github.io/SmartBin-Dashboard]([https://pasindusurath.github.io/SmartBin-Dashboard](https://pasindu-surath.github.io/Smart-Waste-Management-System/))
+🔗 **Live Demo:** ([https://pasindusurath.github.io/SmartBin-Dashboard](https://pasindu-surath.github.io/Smart-Waste-Management-System/))
 
 A modern, real-time IoT Waste Management Dashboard developed for monitoring smart dustbins...
 
