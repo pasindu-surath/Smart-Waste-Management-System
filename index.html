@@ -56,6 +56,23 @@
     .mono { font-family: 'JetBrains Mono', monospace; }
     /* ── Layout shell ─────────────────────────────────── */
     .dash-shell { display: flex; min-height: 100vh; }
+    
+    /* ── Mobile Sidebar Overlay ───────────────────────── */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.4);
+      backdrop-filter: blur(2px);
+      z-index: 95;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .sidebar-overlay.show {
+      display: block;
+      opacity: 1;
+    }
+
     /* ── Sidebar ──────────────────────────────────────── */
     .sidebar {
       width: 240px;
@@ -69,6 +86,7 @@
       top: 0; left: 0;
       height: 100vh;
       z-index: 100;
+      transition: transform 0.3s ease;
     }
     .sidebar-logo {
       padding: 0 24px 24px;
@@ -160,8 +178,10 @@
     }
     .conn-dot.pulse { animation: connPulse 1.5s infinite; }
     @keyframes connPulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+    
     /* ── Main content ─────────────────────────────────── */
-    .dash-main { margin-left: 240px; flex: 1; display: flex; flex-direction: column; }
+    .dash-main { margin-left: 240px; flex: 1; display: flex; flex-direction: column; transition: margin-left 0.3s ease; }
+    
     /* ── Top bar ──────────────────────────────────────── */
     .topbar {
       background: var(--bg-panel);
@@ -174,6 +194,30 @@
       top: 0;
       z-index: 90;
     }
+    .mobile-toggle {
+      display: none;
+      font-size: 24px;
+      background: none;
+      border: none;
+      color: var(--text-head);
+      cursor: pointer;
+      margin-right: 14px;
+      padding: 0;
+    }
+    
+    /* Mobile Logo in Topbar */
+    .topbar-logo-mobile { display: none; margin-right: 14px; text-decoration: none; }
+    .topbar-logo-mobile .logo-mark {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--green), #34D399);
+      border-radius: 8px; display: inline-flex; align-items: center; justify-content: center;
+      font-size: 18px; color: #fff; box-shadow: var(--shadow-glow);
+    }
+    
+    /* Clickable Title */
+    .title-link { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+    .title-link:hover { opacity: 0.8; }
+    
     .topbar-title { font-size: 19px; font-weight: 700; color: var(--text-head); margin: 0; }
     .topbar-subtitle { font-size: 12.5px; color: var(--text-muted); margin-top: 2px; }
     .topbar-right { display: flex; align-items: center; gap: 14px; }
@@ -206,8 +250,10 @@
     }
     .last-sync { font-size: 12px; color: var(--text-muted); }
     .last-sync span { color: var(--green-deep); font-weight: 600; }
+    
     /* ── Page body ────────────────────────────────────── */
     .dash-body { padding: 30px 32px; flex: 1; }
+    
     /* ── Stat summary row ─────────────────────────────── */
     .stat-card {
       background: var(--bg-card);
@@ -238,6 +284,7 @@
       letter-spacing: -0.02em;
     }
     .stat-card .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 6px; font-weight: 500; }
+    
     /* ── Section label ────────────────────────────────── */
     .section-label {
       font-size: 11px;
@@ -247,6 +294,7 @@
       margin-bottom: 14px;
       font-weight: 700;
     }
+    
     /* ── Bin cards ────────────────────────────────────── */
     .bin-card {
       background: var(--bg-card);
@@ -268,6 +316,7 @@
       0%,100% { box-shadow: 0 0 0 3px rgba(239,68,68,0.08), var(--shadow-md); }
       50%      { box-shadow: 0 0 0 6px rgba(239,68,68,0.15), var(--shadow-md); }
     }
+    
     /* ── Bin cylinder (glass look) ────────────────────── */
     .bin-cylinder-wrap { display: flex; flex-direction: column; align-items: center; margin: 18px 0 22px; }
     .bin-cylinder {
@@ -336,6 +385,7 @@
       transform-origin: left center;
     }
     .bin-lid.open { transform: rotate(-35deg) translateX(-6px) translateY(-4px); background: linear-gradient(180deg, #D1FAE5, #A7F3D0); }
+    
     /* ── Bin info ─────────────────────────────────────── */
     .bin-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
     .bin-name { font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 700; color: var(--text-head); margin: 0; }
@@ -368,6 +418,7 @@
       display: inline-flex; align-items: center; justify-content: center; gap: 6px;
     }
     .btn-mark-empty:hover { background: var(--green); border-color: var(--green); color: #fff; box-shadow: var(--shadow-glow); }
+    
     /* ── Panels (alerts / log) ────────────────────────── */
     .alert-panel, .log-panel {
       background: var(--bg-card);
@@ -411,16 +462,19 @@
     .alert-time  { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
     .no-alerts { text-align: center; padding: 32px 0 20px; color: var(--text-muted); font-size: 13px; }
     .no-alerts i { font-size: 34px; display: block; margin-bottom: 10px; color: var(--green); }
+    
     /* ── Activity log ─────────────────────────────────── */
     .log-entry { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 12.5px; }
     .log-entry:last-child { border-bottom: none; }
     .log-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 0 3px rgba(15,23,42,0.04); }
     .log-msg { color: var(--text-body); flex: 1; }
     .log-time { color: var(--text-muted); font-size: 11px; white-space: nowrap; }
+    
     /* ── View switcher ────────────────────────────────── */
     .view-panel { display: none; }
     .view-panel.active { display: block; animation: viewIn 0.25s ease; }
     @keyframes viewIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    
     /* ── Analytics ────────────────────────────────────── */
     .chart-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 22px 24px; box-shadow: var(--shadow-md); margin-bottom: 20px; }
     .chart-card h6 { font-size: 14px; font-weight: 700; margin: 0 0 4px; }
@@ -430,6 +484,7 @@
     .bar-chart .bar::after { content: attr(data-v); position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: 10.5px; font-weight: 700; color: var(--text-head); font-family: 'JetBrains Mono', monospace; }
     .bar-labels { display: flex; gap: 10px; margin-top: 8px; }
     .bar-labels span { flex: 1; text-align: center; font-size: 11px; color: var(--text-muted); font-weight: 600; }
+    
     /* ── History table ────────────────────────────────── */
     .data-table { width: 100%; border-collapse: separate; border-spacing: 0; }
     .data-table thead th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 700; padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg-raised); }
@@ -441,6 +496,7 @@
     .type-paper   { background: #DBEAFE; color: var(--blue); }
     .type-organic { background: var(--purple-soft); color: var(--purple); }
     .type-system  { background: #E2E8F0; color: #475569; }
+    
     /* ── Devices ──────────────────────────────────────── */
     .device-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px 22px; box-shadow: var(--shadow-md); margin-bottom: 20px; }
     .device-card .dev-head { display:flex; align-items:center; justify-content:space-between; margin-bottom: 14px; }
@@ -449,6 +505,7 @@
     .dev-row:last-child { border-bottom: none; }
     .dev-row .k { color: var(--text-muted); font-weight: 500; }
     .dev-row .v { color: var(--text-head); font-weight: 600; font-family: 'JetBrains Mono', monospace; }
+    
     /* ── Settings ─────────────────────────────────────── */
     .settings-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 26px 28px; box-shadow: var(--shadow-md); margin-bottom: 18px; }
     .settings-card h6 { font-size: 15px; font-weight: 700; margin: 0 0 4px; }
@@ -471,21 +528,43 @@
     .toggle input:checked + .slider::before { transform: translateX(20px); }
     .btn-save { background: var(--green); color: #fff; border: none; padding: 10px 22px; border-radius: var(--radius-sm); font-weight: 600; font-size: 13px; cursor: pointer; transition: 0.15s; box-shadow: var(--shadow-glow); }
     .btn-save:hover { background: var(--green-deep); }
+    
+    /* ── Responsive Queries ───────────────────────────── */
     @media (max-width: 900px) {
-      .sidebar { display: none; }
+      .mobile-toggle { display: block; }
+      .topbar-logo-mobile { display: block; }
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
       .dash-main { margin-left: 0; }
     }
     @media (max-width: 600px) {
       .dash-body { padding: 18px; }
-      .topbar { padding: 14px 18px; }
+      .topbar { padding: 12px 14px; }
       .form-row { flex-direction: column; align-items: flex-start; }
+      
+      /* Mobile Topbar Adjustments */
+      .topbar-title { font-size: 16px; }
+      .topbar-subtitle { display: none; } /* ඉඩ ගන්න Subtitle එක හංගනවා */
+      .topbar-right { gap: 8px; }
+      .last-sync { font-size: 10px; text-align: right; }
+      .realtime-clock { min-width: auto; padding: 4px 8px; }
+      .rt-time { font-size: 14px; }
+      .rt-date { font-size: 9px; }
     }
   </style>
 </head>
 <body>
+
+<!-- Overlay for mobile sidebar -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
 <div class="dash-shell">
   <!-- ── Sidebar ─────────────────────────────────── -->
-  <aside class="sidebar">
+  <aside class="sidebar" id="appSidebar">
     <div class="sidebar-logo">
       <div class="logo-mark"><i class="bi bi-recycle"></i></div>
       <h5>SmartBin</h5>
@@ -510,13 +589,29 @@
       </div>
     </div>
   </aside>
+  
   <!-- ── Main ─────────────────────────────────────── -->
   <main class="dash-main">
     <!-- Top bar -->
     <div class="topbar">
-      <div>
-        <h1 class="topbar-title" id="viewTitle">Live Monitor</h1>
-        <div class="topbar-subtitle" id="viewSubtitle">Real-time bin telemetry & alerts</div>
+      <div class="d-flex align-items-center">
+        <!-- Mobile menu toggle button -->
+        <button class="mobile-toggle" id="mobileToggle" onclick="toggleSidebar()">
+          <i class="bi bi-list"></i>
+        </button>
+        
+        <!-- Mobile Logo Link -->
+        <a href="https://pasindu-surath.github.io/Smart-Waste-Management-System/" class="topbar-logo-mobile">
+          <div class="logo-mark"><i class="bi bi-recycle"></i></div>
+        </a>
+
+        <div>
+          <!-- Title linked to home web -->
+          <a href="https://pasindu-surath.github.io/Smart-Waste-Management-System/" class="title-link">
+            <h1 class="topbar-title" id="viewTitle">Live Monitor</h1>
+          </a>
+          <div class="topbar-subtitle" id="viewSubtitle">Real-time bin telemetry & alerts</div>
+        </div>
       </div>
       <div class="topbar-right">
         <div class="last-sync">Last sync: <span id="lastSync">--:--:--</span></div>
@@ -828,7 +923,6 @@ window.initFirebase = function () {
     Object.entries(binsData).forEach(([binName, fill]) => {
       
       // --- 1. Deposit Logic ---
-      // If current fill is greater than previous, it's considered a new deposit
       if (previousBins[binName] !== null && fill > previousBins[binName]) {
         depositCounts[binName]++;
         totalDeposits++;
@@ -856,7 +950,6 @@ window.initFirebase = function () {
     window.setFirebaseStatus(false);
   });
 
-  // Load Alerts & History listeners
   listenAlerts();
   listenHistory();
 };
@@ -875,7 +968,7 @@ window.saveAlertToFirebase = function(alertData) {
 };
 
 // ------------------------------------
-// LISTEN ALERTS (FOR SIDEBAR ALERTS PAGE)
+// LISTEN ALERTS
 // ------------------------------------
 function listenAlerts() {
   const alertsRef = ref(database, "smartbin/alerts");
@@ -884,11 +977,7 @@ function listenAlerts() {
     const fullAlertLog = document.getElementById("fullAlertLog");
 
     if (!data) {
-      fullAlertLog.innerHTML = `
-        <div class="text-muted p-4 text-center">
-          No alerts recorded yet.
-        </div>
-      `;
+      fullAlertLog.innerHTML = `<div class="text-muted p-4 text-center">No alerts recorded yet.</div>`;
       return;
     }
 
@@ -915,13 +1004,12 @@ function listenAlerts() {
         </div>
       `;
     });
-
     fullAlertLog.innerHTML = fullHTML;
   });
 }
 
 // ------------------------------------
-// ANALYTICS UPDATE FUNCTION
+// ANALYTICS UPDATE
 // ------------------------------------
 function updateAnalytics(plastic, paper, organic) {
   const bars = document.querySelectorAll("#view-analytics .bar");
@@ -936,7 +1024,7 @@ function updateAnalytics(plastic, paper, organic) {
 }
 
 // ------------------------------------
-// LISTEN HISTORY (FOR HISTORY PAGE)
+// LISTEN HISTORY
 // ------------------------------------
 function listenHistory() {
   const historyRef = ref(database, "smartbin/history");
@@ -944,13 +1032,7 @@ function listenHistory() {
     const data = snapshot.val();
     const table = document.getElementById("historyTableBody");
     if (!data) {
-      table.innerHTML = `
-        <tr>
-          <td colspan="4" class="text-center text-muted py-4">
-            No collection logs available.
-          </td>
-        </tr>
-      `;
+      table.innerHTML = `<tr><td colspan="4" class="text-center text-muted py-4">No collection logs available.</td></tr>`;
       return;
     }
     const history = Object.values(data).reverse();
@@ -961,17 +1043,9 @@ function listenHistory() {
       html += `
         <tr>
           <td>${time}</td>
-          <td>
-            <span class="type-chip type-${binType}">
-              ${item.bin || "System"}
-            </span>
-          </td>
+          <td><span class="type-chip type-${binType}">${item.bin || "System"}</span></td>
           <td>${item.event}</td>
-          <td>
-            <span class="badge ${item.status === 'FULL' || item.status === 'ERROR' ? 'bg-danger' : item.status === 'WARNING' ? 'bg-warning text-dark' : 'bg-success'}">
-              ${item.status}
-            </span>
-          </td>
+          <td><span class="badge ${item.status === 'FULL' || item.status === 'ERROR' ? 'bg-danger' : item.status === 'WARNING' ? 'bg-warning text-dark' : 'bg-success'}">${item.status}</span></td>
         </tr>
       `;
     });
@@ -987,7 +1061,7 @@ window.sendEmptyCmd = function (binName) {
   set(commandRef, { command: "empty", bin: binName, timestamp: Date.now() })
   .then(() => {
     window.addHistory(binName, "Bin marked as emptied", "SUCCESS");
-    window.updateBinUI(binName, 0, depositCounts[binName], false); // Keeps deposit count as is when emptied
+    window.updateBinUI(binName, 0, depositCounts[binName], false);
     console.log(`Empty command sent for ${binName}`);
   })
   .catch((error) => {
@@ -1023,6 +1097,18 @@ window.saveSettings = function () {
     if (window.initFirebase) window.initFirebase();
     setInterval(updateUptime, 1000);
   }
+  
+  // Mobile Sidebar Toggle function
+  window.toggleSidebar = function() {
+    const sidebar = document.getElementById('appSidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    sidebar.classList.toggle('open');
+    if (sidebar.classList.contains('open')) {
+      overlay.classList.add('show');
+    } else {
+      overlay.classList.remove('show');
+    }
+  };
 
   // Real-time Top Clock
   function initClock() {
@@ -1050,8 +1136,19 @@ window.saveSettings = function () {
         document.querySelectorAll('.view-panel').forEach(panel => panel.classList.remove('active'));
         document.getElementById(`view-${targetView}`).classList.add('active');
         
-        document.getElementById('viewTitle').textContent = link.getAttribute('data-title');
+        // Remove link tags dynamically for non-dashboard views to prevent confusing clicks
+        if(targetView === 'dashboard') {
+          document.getElementById('viewTitle').innerHTML = '<a href="https://pasindu-surath.github.io/Smart-Waste-Management-System/" class="title-link">Live Monitor</a>';
+        } else {
+          document.getElementById('viewTitle').innerHTML = link.getAttribute('data-title');
+        }
+        
         document.getElementById('viewSubtitle').textContent = link.getAttribute('data-sub');
+        
+        // Auto-close sidebar on mobile after clicking a link
+        if (window.innerWidth <= 900) {
+          toggleSidebar();
+        }
       });
     });
   }
@@ -1146,7 +1243,7 @@ window.saveSettings = function () {
     });
   }
 
-  // BIN ALERT SYSTEM (Live Dashboard + Permanent Save to History & Alerts)
+  // BIN ALERT SYSTEM 
   window.checkBinAlert = function(binName, fill) {
     const alertKey = `${binName}-alert`;
     const existingIndex = alertHistory.findIndex(alert => alert.key === alertKey);
@@ -1175,36 +1272,20 @@ window.saveSettings = function () {
         alert.time = new Date().toLocaleTimeString();
         alertHistory.push(alert);
         window.addActivityLog(`⚠ Alert triggered: ${alert.message}`);
-
-        // Save permanently to Alerts Page
-        if (window.saveAlertToFirebase) {
-          window.saveAlertToFirebase(alert);
-        }
-        // Save permanently to History Page
-        if (window.addHistory) {
-          window.addHistory(binName, alert.message, alert.level);
-        }
+        if (window.saveAlertToFirebase) window.saveAlertToFirebase(alert);
+        if (window.addHistory) window.addHistory(binName, alert.message, alert.level);
       } else {
         if (alertHistory[existingIndex].level !== alert.level) {
-          if (window.saveAlertToFirebase) {
-            window.saveAlertToFirebase(alert);
-          }
-          if (window.addHistory) {
-            window.addHistory(binName, alert.message, alert.level);
-          }
+          if (window.saveAlertToFirebase) window.saveAlertToFirebase(alert);
+          if (window.addHistory) window.addHistory(binName, alert.message, alert.level);
         }
         alertHistory[existingIndex] = { ...alertHistory[existingIndex], ...alert };
       }
     } else {
-      // Remove live alert from dashboard when bin returns to normal
       if (existingIndex !== -1) {
         alertHistory.splice(existingIndex, 1);
         window.addActivityLog(`✓ ${binName} bin returned to normal level`);
-
-        // Save normal state restoration to History Page
-        if (window.addHistory) {
-          window.addHistory(binName, `${binName} bin level returned to normal (${fill}%)`, "NORMAL");
-        }
+        if (window.addHistory) window.addHistory(binName, `${binName} bin level returned to normal (${fill}%)`, "NORMAL");
       }
     }
     renderAlerts();
@@ -1219,12 +1300,7 @@ window.saveSettings = function () {
     activeAlertCount.textContent = alertHistory.length;
 
     if (alertHistory.length === 0) {
-      alertList.innerHTML = `
-        <div class="no-alerts">
-          <i class="bi bi-shield-check"></i>
-          All bins operating normally.
-        </div>
-      `;
+      alertList.innerHTML = `<div class="no-alerts"><i class="bi bi-shield-check"></i>All bins operating normally.</div>`;
       return;
     }
 
