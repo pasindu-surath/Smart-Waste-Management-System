@@ -1,26 +1,51 @@
-# SmartBin — Waste Management Dashboard
+# 🌍 Smart Waste Management System (IoT)
 
-A modern, real-time IoT Waste Management Dashboard developed for monitoring smart dustbins. This system establishes a live connection with an ESP32 microcontroller over WebSockets to provide dynamic visual updates, capacity tracking, and remote control capabilities.
+![Smart Bin Project](images/smart-bin.jpg)
 
-🔗 **Live Demo:** ([https://pasindusurath.github.io/SmartBin-Dashboard](https://pasindu-surath.github.io/Smart-Waste-Management-System/))
+A complete, touchless, and real-time smart waste management solution. This project integrates automated hardware with a live web dashboard to monitor waste levels, prevent overflowing, and ensure a hygienic environment.
 
-A modern, real-time IoT Waste Management Dashboard developed for monitoring smart dustbins...
+### 🔴 [Click Here to View Live Demo]( https://pasindu-surath.github.io/Smart-Waste-Management-System/)
 
-## 🚀 Features
+---
 
-- **Real-Time Telemetry:** Live updates of bin capacity (Plastic, Paper, and Organic categories) using WebSocket communication.
-- **Dynamic UI:** Fluid glassmorphism-styled bin cylinders that dynamically change color based on waste levels (Green $\rightarrow$ Amber $\rightarrow$ Red).
-- **Automated Alerts & Controls:** Instant visual warnings for critical capacities and a "Mark as Emptied" remote action trigger.
-- **Comprehensive View Switcher:** Dedicated views for the Live Monitor, Analytics, Active Alerts, Event History, Connected Devices, and Threshold Settings.
-- **Clean Responsive UI:** Fully responsive design built with Tailwind CSS concepts using Bootstrap 5.3, custom dark/light elements, and Space Grotesk typography.
+## 🚀 Key Features
 
-## 🛠️ Tech Stack
+* **Touchless Operation:** IR sensors detect user presence, and Servo motors automatically open the bin lids, preventing physical contact and germ spread.
+* **Real-Time Monitoring:** Ultrasonic sensors measure the garbage level inside the bins continuously.
+* **Live Web Dashboard:** Built with HTML, CSS, and Vanilla JavaScript, the dashboard connects to a Firebase Realtime Database to display live bin levels (0-100%).
+* **Categorized Disposal:** Three distinct sections for Paper (Yellow), Organic (Green), and Plastic (Red).
+* **Automated Alerts:** A built-in buzzer sounds when a bin reaches 100% capacity, and the dashboard flashes a 'FULL' warning for sanitation workers.
 
-- **Frontend:** HTML5, CSS3 (Modern UI layout), JavaScript (ES6+), Bootstrap 5.3, Bootstrap Icons
-- **Backend/IoT Node:** ESP32 (Arduino framework), WebSockets (`WebSocketsServer`), JSON communication (`ArduinoJson`)
+## 🛠️ Technology Stack
+
+**Hardware:**
+* Arduino UNO (Controls IR sensors & Servo motors)
+* ESP32 Wi-Fi Module (Reads Ultrasonic data & sends it to Firebase)
+* Ultrasonic Sensors (HC-SR04)
+* IR Proximity Sensors
+* Servo Motors & Local LCD Display
+* Buzzer Module
+
+**Software / Web Dashboard:**
+* Frontend: HTML5, CSS3, Vanilla JavaScript
+* Backend/Database: Firebase Realtime Database (BaaS)
+* C++ (For Arduino and ESP32 programming via Arduino IDE)
 
 ## 📂 Project Structure
 
-```text
-├── index.html       # The main responsive frontend dashboard UI
-└── README.md        # Project documentation
+This repository contains both the hardware logic and the software interface:
+
+* `/web-dashboard/` - Contains `index.html`, styling, and the extracted `script.js` which handles the DOM manipulation and Firebase connection.
+* `/hardware-code/` - Contains the `.ino` files for both the Arduino board and the ESP32 module.
+
+## ⚙️ Setup & Installation
+
+**1. Web Dashboard:**
+* Navigate to the `/web-dashboard/` folder.
+* Update the `script.js` file with your own Firebase Configuration keys.
+* Open `index.html` in any modern web browser to view the dashboard.
+
+**2. Hardware:**
+* Open the `/hardware-code/` folder using the Arduino IDE.
+* Flash `arduino_controller.ino` to your Arduino board.
+* Update the Wi-Fi credentials and Firebase URL inside `esp32_firebase.ino` before flashing it to your ESP32 board.
