@@ -10,13 +10,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet"/>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
-<<<<<<< HEAD
   <link rel="icon" href="data:,">
-=======
-
-  <link rel="icon" href="data:,">
-  
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
   <style>
     /* ── Design tokens (Light Theme) ──────────────────── */
     :root {
@@ -25,22 +19,11 @@
       --bg-card:    #FFFFFF;   /* cards */
       --bg-raised:  #F8FAFC;   /* subtle raised surfaces */
       --bg-glass:   rgba(16,185,129,0.04);
-<<<<<<< HEAD
       --border:      #E2E8F0;
       --border-strong: #CBD5E1;
       --text-head:  #0F172A;
       --text-body:  #334155;
       --text-muted: #64748B;
-=======
-
-      --border:      #E2E8F0;
-      --border-strong: #CBD5E1;
-
-      --text-head:  #0F172A;
-      --text-body:  #334155;
-      --text-muted: #64748B;
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
       --green:      #10B981;
       --green-deep: #059669;
       --green-soft: #D1FAE5;
@@ -51,18 +34,10 @@
       --blue:       #3B82F6;
       --purple:     #8B5CF6;
       --purple-soft:#EDE9FE;
-<<<<<<< HEAD
-=======
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
       --shadow-sm:  0 1px 2px 0 rgb(0 0 0 / 0.04);
       --shadow-md:  0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.04);
       --shadow-lg:  0 10px 15px -3px rgb(0 0 0 / 0.06), 0 4px 6px -4px rgb(0 0 0 / 0.04);
       --shadow-glow:0 8px 24px -8px rgba(16,185,129,0.35);
-<<<<<<< HEAD
-=======
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
       --radius-sm: 8px;
       --radius-md: 14px;
       --radius-lg: 20px;
@@ -79,15 +54,25 @@
     }
     h1,h2,h3,h4,h5 { font-family: 'Space Grotesk', sans-serif; color: var(--text-head); letter-spacing: -0.01em; }
     .mono { font-family: 'JetBrains Mono', monospace; }
-<<<<<<< HEAD
     /* ── Layout shell ─────────────────────────────────── */
     .dash-shell { display: flex; min-height: 100vh; }
-=======
+    
+    /* ── Mobile Sidebar Overlay ───────────────────────── */
+    .sidebar-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.4);
+      backdrop-filter: blur(2px);
+      z-index: 95;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .sidebar-overlay.show {
+      display: block;
+      opacity: 1;
+    }
 
-    /* ── Layout shell ─────────────────────────────────── */
-    .dash-shell { display: flex; min-height: 100vh; }
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
     /* ── Sidebar ──────────────────────────────────────── */
     .sidebar {
       width: 240px;
@@ -101,6 +86,7 @@
       top: 0; left: 0;
       height: 100vh;
       z-index: 100;
+      transition: transform 0.3s ease;
     }
     .sidebar-logo {
       padding: 0 24px 24px;
@@ -168,10 +154,6 @@
       border-radius: 0 3px 3px 0;
     }
     .sidebar-nav .nav-link i { font-size: 16px; }
-<<<<<<< HEAD
-=======
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
     .sidebar-footer {
       margin-top: auto;
       padding: 20px 24px 4px;
@@ -196,15 +178,10 @@
     }
     .conn-dot.pulse { animation: connPulse 1.5s infinite; }
     @keyframes connPulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
-<<<<<<< HEAD
+    
     /* ── Main content ─────────────────────────────────── */
-    .dash-main { margin-left: 240px; flex: 1; display: flex; flex-direction: column; }
-=======
-
-    /* ── Main content ─────────────────────────────────── */
-    .dash-main { margin-left: 240px; flex: 1; display: flex; flex-direction: column; }
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
+    .dash-main { margin-left: 240px; flex: 1; display: flex; flex-direction: column; transition: margin-left 0.3s ease; }
+    
     /* ── Top bar ──────────────────────────────────────── */
     .topbar {
       background: var(--bg-panel);
@@ -217,13 +194,33 @@
       top: 0;
       z-index: 90;
     }
+    .mobile-toggle {
+      display: none;
+      font-size: 24px;
+      background: none;
+      border: none;
+      color: var(--text-head);
+      cursor: pointer;
+      margin-right: 14px;
+      padding: 0;
+    }
+    
+    /* Mobile Logo in Topbar */
+    .topbar-logo-mobile { display: none; margin-right: 14px; text-decoration: none; }
+    .topbar-logo-mobile .logo-mark {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--green), #34D399);
+      border-radius: 8px; display: inline-flex; align-items: center; justify-content: center;
+      font-size: 18px; color: #fff; box-shadow: var(--shadow-glow);
+    }
+    
+    /* Clickable Title */
+    .title-link { text-decoration: none; color: inherit; transition: opacity 0.2s; }
+    .title-link:hover { opacity: 0.8; }
+    
     .topbar-title { font-size: 19px; font-weight: 700; color: var(--text-head); margin: 0; }
     .topbar-subtitle { font-size: 12.5px; color: var(--text-muted); margin-top: 2px; }
     .topbar-right { display: flex; align-items: center; gap: 14px; }
-<<<<<<< HEAD
-=======
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
     .realtime-clock {
       display: flex;
       flex-direction: column;
@@ -253,15 +250,10 @@
     }
     .last-sync { font-size: 12px; color: var(--text-muted); }
     .last-sync span { color: var(--green-deep); font-weight: 600; }
-<<<<<<< HEAD
+    
     /* ── Page body ────────────────────────────────────── */
     .dash-body { padding: 30px 32px; flex: 1; }
-=======
-
-    /* ── Page body ────────────────────────────────────── */
-    .dash-body { padding: 30px 32px; flex: 1; }
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
+    
     /* ── Stat summary row ─────────────────────────────── */
     .stat-card {
       background: var(--bg-card);
@@ -283,10 +275,6 @@
     .icon-amber  { background: var(--amber-soft); color: var(--amber); }
     .icon-purple { background: var(--purple-soft); color: var(--purple); }
     .icon-blue   { background: #DBEAFE; color: var(--blue); }
-<<<<<<< HEAD
-=======
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
     .stat-card .stat-value {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 30px;
@@ -296,10 +284,7 @@
       letter-spacing: -0.02em;
     }
     .stat-card .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 6px; font-weight: 500; }
-<<<<<<< HEAD
-=======
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
+    
     /* ── Section label ────────────────────────────────── */
     .section-label {
       font-size: 11px;
@@ -309,6 +294,7 @@
       margin-bottom: 14px;
       font-weight: 700;
     }
+    
     /* ── Bin cards ────────────────────────────────────── */
     .bin-card {
       background: var(--bg-card);
@@ -330,6 +316,7 @@
       0%,100% { box-shadow: 0 0 0 3px rgba(239,68,68,0.08), var(--shadow-md); }
       50%      { box-shadow: 0 0 0 6px rgba(239,68,68,0.15), var(--shadow-md); }
     }
+    
     /* ── Bin cylinder (glass look) ────────────────────── */
     .bin-cylinder-wrap { display: flex; flex-direction: column; align-items: center; margin: 18px 0 22px; }
     .bin-cylinder {
@@ -375,10 +362,6 @@
       animation: ripple 3s linear infinite;
     }
     @keyframes ripple { 0%{left:-100%} 100%{left:100%} }
-<<<<<<< HEAD
-=======
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
     .bin-pct-label {
       position: absolute;
       top: 50%; left: 50%;
@@ -402,10 +385,7 @@
       transform-origin: left center;
     }
     .bin-lid.open { transform: rotate(-35deg) translateX(-6px) translateY(-4px); background: linear-gradient(180deg, #D1FAE5, #A7F3D0); }
-<<<<<<< HEAD
-=======
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
+    
     /* ── Bin info ─────────────────────────────────────── */
     .bin-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
     .bin-name { font-family: 'Space Grotesk', sans-serif; font-size: 17px; font-weight: 700; color: var(--text-head); margin: 0; }
@@ -425,23 +405,12 @@
     .pill-warn   { background: var(--amber-soft); color: #B45309; border-color: rgba(245,158,11,0.25); }
     .pill-locked { background: var(--red-soft);   color: var(--red); border-color: rgba(239,68,68,0.25); }
     .pill-idle   { background: var(--purple-soft);color: var(--purple); border-color: rgba(139,92,246,0.25); }
-<<<<<<< HEAD
     .fill-bar-track { height: 6px; border-radius: 3px; background: var(--bg-raised); overflow: hidden; margin-top: 10px; border: 1px solid var(--border); }
     .fill-bar-fill { height: 100%; width: 0%; border-radius: 3px; background: linear-gradient(to right, var(--green), var(--green-deep)); transition: width 1s ease; }
-=======
-
-    .fill-bar-track { height: 6px; border-radius: 3px; background: var(--bg-raised); overflow: hidden; margin-top: 10px; border: 1px solid var(--border); }
-    .fill-bar-fill { height: 100%; width: 0%; border-radius: 3px; background: linear-gradient(to right, var(--green), var(--green-deep)); transition: width 1s ease; }
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
     .bin-meta { display: flex; gap: 14px; margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--border); }
     .bin-meta-item { flex: 1; }
     .bin-meta-item .val { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 700; color: var(--text-head); line-height: 1.1; }
     .bin-meta-item .lbl { font-size: 11px; color: var(--text-muted); margin-top: 3px; font-weight: 500; }
-<<<<<<< HEAD
-=======
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
     .btn-mark-empty {
       width: 100%; margin-top: 16px; padding: 10px; border-radius: var(--radius-sm);
       border: 1px solid var(--border); background: var(--bg-raised); color: var(--text-body);
@@ -449,10 +418,7 @@
       display: inline-flex; align-items: center; justify-content: center; gap: 6px;
     }
     .btn-mark-empty:hover { background: var(--green); border-color: var(--green); color: #fff; box-shadow: var(--shadow-glow); }
-<<<<<<< HEAD
-=======
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
+    
     /* ── Panels (alerts / log) ────────────────────────── */
     .alert-panel, .log-panel {
       background: var(--bg-card);
@@ -481,13 +447,7 @@
       font-family: 'Inter', sans-serif;
     }
     .live-pill .conn-dot { background: var(--green); }
-<<<<<<< HEAD
     .panel-body { padding: 8px 22px 18px; }
-=======
-
-    .panel-body { padding: 8px 22px 18px; }
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
     .alert-item { display: flex; align-items: flex-start; gap: 14px; padding: 14px 0; border-bottom: 1px solid var(--border); }
     .alert-item:last-child { border-bottom: none; }
     .alert-icon-wrap {
@@ -500,33 +460,21 @@
     .alert-title { font-weight: 700; color: var(--text-head); font-size: 13.5px; }
     .alert-desc  { font-size: 12.5px; color: var(--text-muted); margin-top: 2px; line-height: 1.45; }
     .alert-time  { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
-<<<<<<< HEAD
     .no-alerts { text-align: center; padding: 32px 0 20px; color: var(--text-muted); font-size: 13px; }
     .no-alerts i { font-size: 34px; display: block; margin-bottom: 10px; color: var(--green); }
-=======
-
-    .no-alerts { text-align: center; padding: 32px 0 20px; color: var(--text-muted); font-size: 13px; }
-    .no-alerts i { font-size: 34px; display: block; margin-bottom: 10px; color: var(--green); }
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
+    
     /* ── Activity log ─────────────────────────────────── */
     .log-entry { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 12.5px; }
     .log-entry:last-child { border-bottom: none; }
     .log-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; box-shadow: 0 0 0 3px rgba(15,23,42,0.04); }
     .log-msg { color: var(--text-body); flex: 1; }
     .log-time { color: var(--text-muted); font-size: 11px; white-space: nowrap; }
-<<<<<<< HEAD
-=======
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
+    
     /* ── View switcher ────────────────────────────────── */
     .view-panel { display: none; }
     .view-panel.active { display: block; animation: viewIn 0.25s ease; }
     @keyframes viewIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-<<<<<<< HEAD
-=======
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
+    
     /* ── Analytics ────────────────────────────────────── */
     .chart-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 22px 24px; box-shadow: var(--shadow-md); margin-bottom: 20px; }
     .chart-card h6 { font-size: 14px; font-weight: 700; margin: 0 0 4px; }
@@ -536,10 +484,7 @@
     .bar-chart .bar::after { content: attr(data-v); position: absolute; top: -18px; left: 50%; transform: translateX(-50%); font-size: 10.5px; font-weight: 700; color: var(--text-head); font-family: 'JetBrains Mono', monospace; }
     .bar-labels { display: flex; gap: 10px; margin-top: 8px; }
     .bar-labels span { flex: 1; text-align: center; font-size: 11px; color: var(--text-muted); font-weight: 600; }
-<<<<<<< HEAD
-=======
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
+    
     /* ── History table ────────────────────────────────── */
     .data-table { width: 100%; border-collapse: separate; border-spacing: 0; }
     .data-table thead th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); font-weight: 700; padding: 12px 16px; border-bottom: 1px solid var(--border); background: var(--bg-raised); }
@@ -550,11 +495,8 @@
     .type-plastic { background: var(--green-soft); color: var(--green-deep); }
     .type-paper   { background: #DBEAFE; color: var(--blue); }
     .type-organic { background: var(--purple-soft); color: var(--purple); }
-<<<<<<< HEAD
     .type-system  { background: #E2E8F0; color: #475569; }
-=======
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
+    
     /* ── Devices ──────────────────────────────────────── */
     .device-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 20px 22px; box-shadow: var(--shadow-md); margin-bottom: 20px; }
     .device-card .dev-head { display:flex; align-items:center; justify-content:space-between; margin-bottom: 14px; }
@@ -563,10 +505,7 @@
     .dev-row:last-child { border-bottom: none; }
     .dev-row .k { color: var(--text-muted); font-weight: 500; }
     .dev-row .v { color: var(--text-head); font-weight: 600; font-family: 'JetBrains Mono', monospace; }
-<<<<<<< HEAD
-=======
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
+    
     /* ── Settings ─────────────────────────────────────── */
     .settings-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 26px 28px; box-shadow: var(--shadow-md); margin-bottom: 18px; }
     .settings-card h6 { font-size: 15px; font-weight: 700; margin: 0 0 4px; }
@@ -589,40 +528,48 @@
     .toggle input:checked + .slider::before { transform: translateX(20px); }
     .btn-save { background: var(--green); color: #fff; border: none; padding: 10px 22px; border-radius: var(--radius-sm); font-weight: 600; font-size: 13px; cursor: pointer; transition: 0.15s; box-shadow: var(--shadow-glow); }
     .btn-save:hover { background: var(--green-deep); }
-<<<<<<< HEAD
-=======
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
+    
+    /* ── Responsive Queries ───────────────────────────── */
     @media (max-width: 900px) {
-      .sidebar { display: none; }
+      .mobile-toggle { display: block; }
+      .topbar-logo-mobile { display: block; }
+      .sidebar {
+        transform: translateX(-100%);
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
       .dash-main { margin-left: 0; }
     }
     @media (max-width: 600px) {
       .dash-body { padding: 18px; }
-      .topbar { padding: 14px 18px; }
+      .topbar { padding: 12px 14px; }
       .form-row { flex-direction: column; align-items: flex-start; }
+      
+      /* Mobile Topbar Adjustments */
+      .topbar-title { font-size: 16px; }
+      .topbar-subtitle { display: none; } /* ඉඩ ගන්න Subtitle එක හංගනවා */
+      .topbar-right { gap: 8px; }
+      .last-sync { font-size: 10px; text-align: right; }
+      .realtime-clock { min-width: auto; padding: 4px 8px; }
+      .rt-time { font-size: 14px; }
+      .rt-date { font-size: 9px; }
     }
   </style>
 </head>
 <body>
-<<<<<<< HEAD
-<div class="dash-shell">
-=======
+
+<!-- Overlay for mobile sidebar -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
 <div class="dash-shell">
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
   <!-- ── Sidebar ─────────────────────────────────── -->
-  <aside class="sidebar">
+  <aside class="sidebar" id="appSidebar">
     <div class="sidebar-logo">
       <div class="logo-mark"><i class="bi bi-recycle"></i></div>
       <h5>SmartBin</h5>
       <small>Waste Management</small>
     </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
     <div class="nav-section-label">Monitor</div>
     <nav class="sidebar-nav nav flex-column" id="sideNav">
       <a class="nav-link active" href="#" data-view="dashboard" data-title="Live Monitor" data-sub="Real-time bin telemetry & alerts"><i class="bi bi-speedometer2"></i> Dashboard</a>
@@ -630,46 +577,41 @@
       <a class="nav-link" href="#" data-view="alerts" data-title="Alerts" data-sub="Active & resolved system signals"><i class="bi bi-bell"></i> Alerts</a>
       <a class="nav-link" href="#" data-view="history" data-title="History" data-sub="Past collections & waste log"><i class="bi bi-clock-history"></i> History</a>
     </nav>
-<<<<<<< HEAD
-=======
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
     <div class="nav-section-label" style="margin-top:22px;">System</div>
     <nav class="sidebar-nav nav flex-column" id="sideNav2">
       <a class="nav-link" href="#" data-view="devices" data-title="Devices" data-sub="ESP32 nodes & connectivity"><i class="bi bi-cpu"></i> Devices</a>
       <a class="nav-link" href="#" data-view="settings" data-title="Settings" data-sub="Thresholds, endpoints & notifications"><i class="bi bi-gear"></i> Settings</a>
     </nav>
-<<<<<<< HEAD
     <div class="sidebar-footer">
-=======
-
-    <div class="sidebar-footer">
-      <!-- රිෆ්‍රෙෂ් කරද්දී මුලින්ම offline (Connecting...) කියලා පේන්න මෙතන වෙනස් කළා -->
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
       <div id="connStatus" class="conn-pill offline">
         <span class="conn-dot pulse"></span>
         <span id="connText">Connecting...</span>
       </div>
     </div>
   </aside>
-<<<<<<< HEAD
+  
   <!-- ── Main ─────────────────────────────────────── -->
   <main class="dash-main">
-=======
-
-  <!-- ── Main ─────────────────────────────────────── -->
-  <main class="dash-main">
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
     <!-- Top bar -->
     <div class="topbar">
-      <div>
-        <h1 class="topbar-title" id="viewTitle">Live Monitor</h1>
-<<<<<<< HEAD
-        <div class="topbar-subtitle" id="viewSubtitle">Real-time bin telemetry & alerts</div>
-=======
-        <div class="topbar-subtitle" id="viewSubtitle">Real-time bin telemetry &amp; alerts</div>
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
+      <div class="d-flex align-items-center">
+        <!-- Mobile menu toggle button -->
+        <button class="mobile-toggle" id="mobileToggle" onclick="toggleSidebar()">
+          <i class="bi bi-list"></i>
+        </button>
+        
+        <!-- Mobile Logo Link -->
+        <a href="https://pasindu-surath.github.io/Smart-Waste-Management-System/" class="topbar-logo-mobile">
+          <div class="logo-mark"><i class="bi bi-recycle"></i></div>
+        </a>
+
+        <div>
+          <!-- Title linked to home web -->
+          <a href="https://pasindu-surath.github.io/Smart-Waste-Management-System/" class="title-link">
+            <h1 class="topbar-title" id="viewTitle">Live Monitor</h1>
+          </a>
+          <div class="topbar-subtitle" id="viewSubtitle">Real-time bin telemetry & alerts</div>
+        </div>
       </div>
       <div class="topbar-right">
         <div class="last-sync">Last sync: <span id="lastSync">--:--:--</span></div>
@@ -679,15 +621,8 @@
         </div>
       </div>
     </div>
-<<<<<<< HEAD
     <!-- Body -->
     <div class="dash-body">
-=======
-
-    <!-- Body -->
-    <div class="dash-body">
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
       <!-- ═══════════ DASHBOARD VIEW ═══════════ -->
       <section class="view-panel active" id="view-dashboard">
         <!-- Stat summary -->
@@ -697,7 +632,6 @@
               <div class="stat-icon icon-green"><i class="bi bi-arrow-down-circle"></i></div>
               <div class="stat-value" id="totalDeposits">0</div>
               <div class="stat-label">Total deposits today</div>
-<<<<<<< HEAD
             </div>
           </div>
           <div class="col-md-3 col-sm-6">
@@ -792,106 +726,6 @@
             </div>
           </div>
         </div>
-=======
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <div class="stat-card">
-              <div class="stat-icon icon-amber"><i class="bi bi-exclamation-triangle"></i></div>
-              <div class="stat-value" id="activeAlertCount">0</div>
-              <div class="stat-label">Active alerts</div>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <div class="stat-card">
-              <div class="stat-icon icon-blue"><i class="bi bi-check2-circle"></i></div>
-              <div class="stat-value">3</div>
-              <div class="stat-label">Bins operational</div>
-            </div>
-          </div>
-          <div class="col-md-3 col-sm-6">
-            <div class="stat-card">
-              <div class="stat-icon icon-purple"><i class="bi bi-hourglass-split"></i></div>
-              <div class="stat-value" id="systemUptime">00:00:00</div>
-              <div class="stat-label">System uptime</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bins -->
-        <div class="section-label">Bin Status — Real Time</div>
-        <div class="row g-3 mb-4">
-          <!-- PLASTIC -->
-          <div class="col-lg-4 col-md-6">
-            <div class="bin-card" id="card-Plastic">
-              <div class="bin-header">
-                <h5 class="bin-name">♻ Plastic</h5>
-                <span class="bin-status-pill pill-ok" id="pill-Plastic"><i class="bi bi-circle-fill" style="font-size:6px"></i> Normal</span>
-              </div>
-              <div class="bin-cylinder-wrap">
-                <div class="bin-lid" id="lid-Plastic"></div>
-                <div class="bin-cylinder">
-                  <div class="bin-cylinder-fill" id="fill-Plastic"></div>
-                  <div class="bin-pct-label" id="pct-Plastic">0%</div>
-                </div>
-              </div>
-              <div class="fill-bar-track"><div class="fill-bar-fill" id="bar-Plastic"></div></div>
-              <div class="bin-meta">
-                <div class="bin-meta-item"><div class="val" id="taps-Plastic">0</div><div class="lbl">Deposits</div></div>
-                <div class="bin-meta-item"><div class="val" id="fill-val-Plastic">0%</div><div class="lbl">Fill level</div></div>
-              </div>
-              <button class="btn-mark-empty" onclick="sendEmptyCmd('Plastic')"><i class="bi bi-arrow-clockwise"></i> Mark as Emptied</button>
-            </div>
-          </div>
-
-          <!-- PAPER -->
-          <div class="col-lg-4 col-md-6">
-            <div class="bin-card" id="card-Paper">
-              <div class="bin-header">
-                <h5 class="bin-name">📄 Paper</h5>
-                <span class="bin-status-pill pill-ok" id="pill-Paper"><i class="bi bi-circle-fill" style="font-size:6px"></i> Normal</span>
-              </div>
-              <div class="bin-cylinder-wrap">
-                <div class="bin-lid" id="lid-Paper"></div>
-                <div class="bin-cylinder">
-                  <div class="bin-cylinder-fill" id="fill-Paper"></div>
-                  <div class="bin-pct-label" id="pct-Paper">0%</div>
-                </div>
-              </div>
-              <div class="fill-bar-track"><div class="fill-bar-fill" id="bar-Paper"></div></div>
-              <div class="bin-meta">
-                <div class="bin-meta-item"><div class="val" id="taps-Paper">0</div><div class="lbl">Deposits</div></div>
-                <div class="bin-meta-item"><div class="val" id="fill-val-Paper">0%</div><div class="lbl">Fill level</div></div>
-              </div>
-              <button class="btn-mark-empty" onclick="sendEmptyCmd('Paper')"><i class="bi bi-arrow-clockwise"></i> Mark as Emptied</button>
-            </div>
-          </div>
-
-          <!-- ORGANIC -->
-          <div class="col-lg-4 col-md-6">
-            <div class="bin-card" id="card-Organic">
-              <div class="bin-header">
-                <h5 class="bin-name">🌿 Organic</h5>
-                <span class="bin-status-pill pill-ok" id="pill-Organic"><i class="bi bi-circle-fill" style="font-size:6px"></i> Normal</span>
-              </div>
-              <div class="bin-cylinder-wrap">
-                <div class="bin-lid" id="lid-Organic"></div>
-                <div class="bin-cylinder">
-                  <div class="bin-cylinder-fill" id="fill-Organic"></div>
-                  <div class="bin-pct-label" id="pct-Organic">0%</div>
-                </div>
-              </div>
-              <div class="fill-bar-track"><div class="fill-bar-fill" id="bar-Organic"></div></div>
-              <div class="bin-meta">
-                <div class="bin-meta-item"><div class="val" id="taps-Organic">0</div><div class="lbl">Deposits</div></div>
-                <div class="bin-meta-item"><div class="val" id="fill-val-Organic">0%</div><div class="lbl">Fill level</div></div>
-              </div>
-              <button class="btn-mark-empty" onclick="sendEmptyCmd('Organic')"><i class="bi bi-arrow-clockwise"></i> Mark as Emptied</button>
-            </div>
-          </div>
-        </div>
-
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
         <!-- Alerts & Logs panels -->
         <div class="row g-3">
           <div class="col-lg-6">
@@ -924,21 +758,12 @@
       <!-- ═══════════ OTHER SECTIONS ═══════════ -->
       <section class="view-panel" id="view-analytics">
         <div class="chart-card">
-<<<<<<< HEAD
           <h6>Bin Fill Levels</h6>
           <div class="sub">Current fill percentage per bin category (%)</div>
           <div class="bar-chart">
             <div class="bar" style="height: 0%" data-v="0%"></div>
             <div class="bar" style="height: 0%" data-v="0%"></div>
             <div class="bar" style="height: 0%" data-v="0%"></div>
-=======
-          <h6>Weekly Garbage Accumulation</h6>
-          <div class="sub">Total volume per bin category (kg)</div>
-          <div class="bar-chart">
-            <div class="bar" style="height: 65%" data-v="42kg"></div>
-            <div class="bar" style="height: 40%" data-v="28kg"></div>
-            <div class="bar" style="height: 85%" data-v="56kg"></div>
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
           </div>
           <div class="bar-labels">
             <span>Plastic</span>
@@ -950,11 +775,7 @@
 
       <section class="view-panel" id="view-alerts">
         <div id="fullAlertLog">
-<<<<<<< HEAD
           <div class="text-muted p-4 text-center">No alerts recorded yet.</div>
-=======
-          <div class="text-muted p-4 text-center">No structural logs recorded yet.</div>
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
         </div>
       </section>
 
@@ -1020,721 +841,12 @@
           </div>
         </div>
       </section>
-<<<<<<< HEAD
     </div>
   </main>
 </div>
 
-<!-- ═══════════ FIREBASE MODULE SCRIPT ═══════════ -->
-<script type="module">
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
-import {
-  getDatabase,
-  ref,
-  set,
-  push,
-  onValue
-}
-from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
 
-const firebaseConfig = {
-  apiKey: "AIzaSyDiRuuvqXPyum-kubFm_uj6oTj_qjplwa4",
-  authDomain: "smart-bin-e2a4e.firebaseapp.com",
-  databaseURL: "https://smart-bin-e2a4e-default-rtdb.firebaseio.com",
-  projectId: "smart-bin-e2a4e",
-  storageBucket: "smart-bin-e2a4e.firebasestorage.app",
-  messagingSenderId: "691078659393",
-  appId: "1:691078659393:web:f27c98e4e5b9f48526f5c0"
-};
 
-// Firebase Initialize
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-
-// Tracking Variables
-let previousBins = { Organic: null, Plastic: null, Paper: null };
-let depositCounts = { Organic: 0, Plastic: 0, Paper: 0 };
-let totalDeposits = 0;
-
-window.smartBinDB = database;
-console.log("🔥 Firebase connected!");
-
-// ------------------------------------
-// ADD TO PERMANENT HISTORY (GLOBAL)
-// ------------------------------------
-window.addHistory = function(bin, event, status) {
-  const historyRef = ref(database, "smartbin/history");
-  push(historyRef, {
-    bin: bin || "System",
-    event: event,
-    status: status || "INFO",
-    timestamp: Date.now()
-  });
-};
-
-// ------------------------------------
-// BIN DATA LISTENER
-// ------------------------------------
-window.initFirebase = function () {
-  const binsRef = ref(database, "bins");
-  onValue(binsRef, (snapshot) => {
-    const data = snapshot.val();
-    console.log("Firebase Data:", data);
-    if (!data) {
-      console.log("No bin data available yet");
-      return;
-    }
-    
-    // Firebase mapping
-    const organicFill = Number(data.bin1 ?? 0);
-    const plasticFill = Number(data.bin2 ?? 0);
-    const paperFill = Number(data.bin3 ?? 0);
-    
-    // Update Last Sync Time
-    const now = new Date();
-    document.getElementById("lastSync").textContent = now.toLocaleTimeString();
-
-    const binsData = { Organic: organicFill, Plastic: plasticFill, Paper: paperFill };
-
-    // Update Analytics Chart
-    updateAnalytics(plasticFill, paperFill, organicFill);
-
-    Object.entries(binsData).forEach(([binName, fill]) => {
-      
-      // --- 1. Deposit Logic ---
-      // If current fill is greater than previous, it's considered a new deposit
-      if (previousBins[binName] !== null && fill > previousBins[binName]) {
-        depositCounts[binName]++;
-        totalDeposits++;
-        document.getElementById("totalDeposits").textContent = totalDeposits;
-      }
-
-      // --- 2. Dashboard UI update ---
-      window.updateBinUI(binName, fill, depositCounts[binName], false);
-
-      // --- 3. Activity log - value changed ---
-      if (previousBins[binName] !== null && previousBins[binName] !== fill) {
-        window.addActivityLog(`${binName} bin level changed from ${previousBins[binName]}% to ${fill}%`);
-      }
-
-      // --- 4. Check Alerts ---
-      window.checkBinAlert(binName, fill);
-      
-      previousBins[binName] = fill;
-    });
-
-    // Firebase status online
-    window.setFirebaseStatus(true);
-  }, (error) => {
-    console.error("Firebase read error:", error);
-    window.setFirebaseStatus(false);
-  });
-
-  // Load Alerts & History listeners
-  listenAlerts();
-  listenHistory();
-};
-
-// ------------------------------------
-// SAVE ALERT TO FIREBASE (PERMANENT)
-// ------------------------------------
-window.saveAlertToFirebase = function(alertData) {
-  const alertRef = ref(database, "smartbin/alerts");
-  push(alertRef, {
-    bin: alertData.bin,
-    level: alertData.level,
-    message: alertData.message,
-    timestamp: Date.now()
-  });
-};
-
-// ------------------------------------
-// LISTEN ALERTS (FOR SIDEBAR ALERTS PAGE)
-// ------------------------------------
-function listenAlerts() {
-  const alertsRef = ref(database, "smartbin/alerts");
-  onValue(alertsRef, (snapshot) => {
-    const data = snapshot.val();
-    const fullAlertLog = document.getElementById("fullAlertLog");
-
-    if (!data) {
-      fullAlertLog.innerHTML = `
-        <div class="text-muted p-4 text-center">
-          No alerts recorded yet.
-        </div>
-      `;
-      return;
-    }
-
-    const alerts = Object.values(data).reverse(); 
-    let fullHTML = "";
-
-    alerts.forEach(alert => {
-      const time = new Date(alert.timestamp).toLocaleString();
-      const iconColor = alert.level === "FULL" ? "text-danger" : "text-warning";
-      const icon = alert.level === "FULL" ? "bi-exclamation-octagon-fill" : "bi-exclamation-triangle-fill";
-
-      fullHTML += `
-        <div class="alert-panel mb-3">
-          <div class="panel-body py-3">
-            <div class="d-flex align-items-center mb-1">
-              <i class="bi ${icon} ${iconColor} me-2" style="font-size: 1.2rem;"></i>
-              <strong style="font-size: 14px;">${alert.level} — ${alert.bin} Bin</strong>
-            </div>
-            <div style="color: var(--text-body); margin-left: 30px; font-size: 13px;">${alert.message}</div>
-            <div class="text-muted mt-1" style="font-size: 11px; margin-left: 30px;">
-              <i class="bi bi-clock me-1"></i> ${time}
-            </div>
-          </div>
-        </div>
-      `;
-    });
-
-    fullAlertLog.innerHTML = fullHTML;
-  });
-}
-
-// ------------------------------------
-// ANALYTICS UPDATE FUNCTION
-// ------------------------------------
-function updateAnalytics(plastic, paper, organic) {
-  const bars = document.querySelectorAll("#view-analytics .bar");
-  if (bars.length >= 3) {
-    bars[0].style.height = `${plastic}%`;
-    bars[0].setAttribute("data-v", `${plastic}%`);
-    bars[1].style.height = `${paper}%`;
-    bars[1].setAttribute("data-v", `${paper}%`);
-    bars[2].style.height = `${organic}%`;
-    bars[2].setAttribute("data-v", `${organic}%`);
-  }
-}
-
-// ------------------------------------
-// LISTEN HISTORY (FOR HISTORY PAGE)
-// ------------------------------------
-function listenHistory() {
-  const historyRef = ref(database, "smartbin/history");
-  onValue(historyRef, (snapshot) => {
-    const data = snapshot.val();
-    const table = document.getElementById("historyTableBody");
-    if (!data) {
-      table.innerHTML = `
-        <tr>
-          <td colspan="4" class="text-center text-muted py-4">
-            No collection logs available.
-          </td>
-        </tr>
-      `;
-      return;
-    }
-    const history = Object.values(data).reverse();
-    let html = "";
-    history.forEach(item => {
-      const time = new Date(item.timestamp).toLocaleString();
-      const binType = (item.bin || "system").toLowerCase();
-      html += `
-        <tr>
-          <td>${time}</td>
-          <td>
-            <span class="type-chip type-${binType}">
-              ${item.bin || "System"}
-            </span>
-          </td>
-          <td>${item.event}</td>
-          <td>
-            <span class="badge ${item.status === 'FULL' || item.status === 'ERROR' ? 'bg-danger' : item.status === 'WARNING' ? 'bg-warning text-dark' : 'bg-success'}">
-              ${item.status}
-            </span>
-          </td>
-        </tr>
-      `;
-    });
-    table.innerHTML = html;
-  });
-}
-
-// ------------------------------------
-// COMMANDS & SETTINGS
-// ------------------------------------
-window.sendEmptyCmd = function (binName) {
-  const commandRef = ref(database, "smartbin/commands");
-  set(commandRef, { command: "empty", bin: binName, timestamp: Date.now() })
-  .then(() => {
-    window.addHistory(binName, "Bin marked as emptied", "SUCCESS");
-    window.updateBinUI(binName, 0, depositCounts[binName], false); // Keeps deposit count as is when emptied
-    console.log(`Empty command sent for ${binName}`);
-  })
-  .catch((error) => {
-    console.error("Firebase command error:", error);
-    alert("Could not send command to Firebase.");
-  });
-};
-
-window.saveSettings = function () {
-  const threshold = document.getElementById("cfgAlertThreshold").value || 85;
-  const autolock = document.getElementById("cfgAutoLock").checked;
-  set(ref(database, "smartbin/settings"), {
-    threshold: Number(threshold),
-    autoLock: autolock,
-    updatedAt: Date.now()
-  })
-  .then(() => alert("Settings saved successfully!"))
-  .catch((error) => alert("Could not save settings."));
-};
-</script>
-
-<!-- ═══════════ JAVASCRIPT LOGIC ═══════════ -->
-<script>
-  let activityLogs = [];
-  let alertHistory = [];
-  let startTime = Date.now();
-
-  window.addEventListener('load', initDashboard);
-
-  function initDashboard() {
-    initClock();
-    initNavigation();
-    if (window.initFirebase) window.initFirebase();
-    setInterval(updateUptime, 1000);
-  }
-
-  // Real-time Top Clock
-  function initClock() {
-    const rtTime = document.getElementById('rtTime');
-    const rtDate = document.getElementById('rtDate');
-    function tick() {
-      const now = new Date();
-      rtTime.textContent = now.toTimeString().split(' ')[0];
-      rtDate.textContent = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-    }
-    setInterval(tick, 1000);
-    tick();
-  }
-
-  // Navigation Tabs Switcher
-  function initNavigation() {
-    const links = document.querySelectorAll('.sidebar-nav .nav-link');
-    links.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        links.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-        
-        const targetView = link.getAttribute('data-view');
-        document.querySelectorAll('.view-panel').forEach(panel => panel.classList.remove('active'));
-        document.getElementById(`view-${targetView}`).classList.add('active');
-        
-        document.getElementById('viewTitle').textContent = link.getAttribute('data-title');
-        document.getElementById('viewSubtitle').textContent = link.getAttribute('data-sub');
-      });
-    });
-  }
-
-  // Dynamic UI Binder
-  window.updateBinUI = function updateBinUI(binName, fill, deposits, isOpen) {
-    const fillEl = document.getElementById(`fill-${binName}`);
-    const barEl = document.getElementById(`bar-${binName}`);
-    const pctEl = document.getElementById(`pct-${binName}`);
-    const valEl = document.getElementById(`fill-val-${binName}`);
-    const tapsEl = document.getElementById(`taps-${binName}`);
-    const lidEl = document.getElementById(`lid-${binName}`);
-    const pillEl = document.getElementById(`pill-${binName}`);
-    const cardEl = document.getElementById(`card-${binName}`);
-    if(!fillEl) return;
-
-    fillEl.style.height = `${fill}%`;
-    barEl.style.width = `${fill}%`;
-    pctEl.textContent = `${fill}%`;
-    valEl.textContent = `${fill}%`;
-    tapsEl.textContent = deposits;
-
-    if(isOpen) lidEl.classList.add('open');
-    else lidEl.classList.remove('open');
-
-    // Threshold styling
-    if(fill >= 80) {
-      fillEl.style.background = 'linear-gradient(to top, #DC2626, #EF4444)';
-      pillEl.className = 'bin-status-pill pill-locked';
-      pillEl.innerHTML = `<i class="bi bi-lock-fill"></i> Full`;
-      cardEl.classList.add('full-alert');
-    } else if (fill >= 50) {
-      fillEl.style.background = 'linear-gradient(to top, #D97706, #F59E0B)';
-      pillEl.className = 'bin-status-pill pill-warn';
-      pillEl.innerHTML = `<i class="bi bi-exclamation-triangle-fill"></i> Warning`;
-      cardEl.classList.remove('full-alert');
-    } else {
-      fillEl.style.background = 'linear-gradient(to top, var(--green-deep), var(--green))';
-      pillEl.className = 'bin-status-pill pill-ok';
-      pillEl.innerHTML = `<i class="bi bi-circle-fill" style="font-size:6px"></i> Normal`;
-      cardEl.classList.remove('full-alert');
-    }
-  };
-
-  function updateUptime() {
-    const diff = Date.now() - startTime;
-    const hrs = String(Math.floor(diff / 3600000)).padStart(2, '0');
-    const mins = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-    const secs = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-    document.getElementById('systemUptime').textContent = `${hrs}:${mins}:${secs}`;
-  }
-
-  // Status Pill
-  window.setFirebaseStatus = function(isOnline) {
-    const connStatus = document.getElementById("connStatus");
-    const connText = document.getElementById("connText");
-    if (isOnline) {
-      connStatus.className = "conn-pill online";
-      connText.textContent = "Firebase Online";
-    } else {
-      connStatus.className = "conn-pill offline";
-      connText.textContent = "Firebase Offline";
-    }
-  };
-
-  // Activity Log
-  window.addActivityLog = function(message) {
-    const now = new Date();
-    const time = now.toLocaleTimeString();
-    activityLogs.unshift({ message: message, time: time });
-    if (activityLogs.length > 20) activityLogs.pop();
-    renderActivityLogs();
-  };
-
-  function renderActivityLogs() {
-    const logList = document.getElementById("logList");
-    if (!logList) return;
-    if (activityLogs.length === 0) {
-      logList.innerHTML = `<div class="text-muted text-center py-3">Waiting for device activity...</div>`;
-      return;
-    }
-    logList.innerHTML = "";
-    activityLogs.forEach(log => {
-      const div = document.createElement("div");
-      div.className = "log-entry";
-      div.innerHTML = `
-        <div class="log-dot" style="background: var(--green)"></div>
-        <div class="log-msg">${log.message}</div>
-        <div class="log-time">${log.time}</div>
-      `;
-      logList.appendChild(div);
-    });
-  }
-
-  // BIN ALERT SYSTEM (Live Dashboard + Permanent Save to History & Alerts)
-  window.checkBinAlert = function(binName, fill) {
-    const alertKey = `${binName}-alert`;
-    const existingIndex = alertHistory.findIndex(alert => alert.key === alertKey);
-    let alert = null;
-
-    if (fill >= 85) {
-      alert = {
-        key: alertKey,
-        bin: binName,
-        level: "FULL",
-        message: `${binName} bin is full (${fill}%)`,
-        fill: fill
-      };
-    } else if (fill >= 65) {
-      alert = {
-        key: alertKey,
-        bin: binName,
-        level: "WARNING",
-        message: `${binName} bin is nearly full (${fill}%)`,
-        fill: fill
-      };
-    }
-
-    if (alert) {
-      if (existingIndex === -1) {
-        alert.time = new Date().toLocaleTimeString();
-        alertHistory.push(alert);
-        window.addActivityLog(`⚠ Alert triggered: ${alert.message}`);
-
-        // Save permanently to Alerts Page
-        if (window.saveAlertToFirebase) {
-          window.saveAlertToFirebase(alert);
-        }
-        // Save permanently to History Page
-        if (window.addHistory) {
-          window.addHistory(binName, alert.message, alert.level);
-        }
-      } else {
-        if (alertHistory[existingIndex].level !== alert.level) {
-          if (window.saveAlertToFirebase) {
-            window.saveAlertToFirebase(alert);
-          }
-          if (window.addHistory) {
-            window.addHistory(binName, alert.message, alert.level);
-          }
-        }
-        alertHistory[existingIndex] = { ...alertHistory[existingIndex], ...alert };
-      }
-    } else {
-      // Remove live alert from dashboard when bin returns to normal
-      if (existingIndex !== -1) {
-        alertHistory.splice(existingIndex, 1);
-        window.addActivityLog(`✓ ${binName} bin returned to normal level`);
-
-        // Save normal state restoration to History Page
-        if (window.addHistory) {
-          window.addHistory(binName, `${binName} bin level returned to normal (${fill}%)`, "NORMAL");
-        }
-      }
-    }
-    renderAlerts();
-  };
-
-  // Render Dashboard Active Alerts
-  function renderAlerts() {
-    const alertList = document.getElementById("alertList");
-    const activeAlertCount = document.getElementById("activeAlertCount");
-    if (!alertList) return;
-
-    activeAlertCount.textContent = alertHistory.length;
-
-    if (alertHistory.length === 0) {
-      alertList.innerHTML = `
-        <div class="no-alerts">
-          <i class="bi bi-shield-check"></i>
-          All bins operating normally.
-        </div>
-      `;
-      return;
-    }
-
-    alertList.innerHTML = "";
-    alertHistory.forEach(alert => {
-      const div = document.createElement("div");
-      div.className = "alert-item";
-      const iconClass = alert.level === "FULL" ? "ai-red" : "ai-amber";
-      const icon = alert.level === "FULL" ? "bi-exclamation-octagon-fill" : "bi-exclamation-triangle-fill";
-=======
-
-    </div>
-  </main>
-</div>
-
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-app.js";
-  import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/12.17.1/firebase-database.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyDiRuuvqXPyum-kubFm_uj6oTj_qjplwa4",
-    authDomain: "smart-bin-e2a4e.firebaseapp.com",
-    databaseURL: "https://smart-bin-e2a4e-default-rtdb.firebaseio.com",
-    projectId: "smart-bin-e2a4e",
-    storageBucket: "smart-bin-e2a4e.firebasestorage.app",
-    messagingSenderId: "691078659393",
-    appId: "1:691078659393:web:f27c98e4e5b9f48526f5c0",
-    measurementId: "G-42H52T53PV"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const database = getDatabase(app);
-  window.smartBinDB = database;
-
-  console.log("🔥 Firebase connected!");
-
-  window.initFirebase = function () {
-    const bins = ["Plastic", "Paper", "Organic"];
-    let latest = {};
-
-    bins.forEach((binName) => {
-      const binRef = ref(database, `smartbin/${binName.toLowerCase()}`);
-      onValue(binRef, (snapshot) => {
-        const data = snapshot.val() || {};
-        const fill = Number(data.fillLevel ?? 0);
-        const deposits = Number(data.deposits ?? 0);
-        const isOpen = Boolean(data.isOpen ?? false);
-
-        latest[binName] = { fill, deposits, isOpen };
-        window.updateBinUI(binName, fill, deposits, isOpen);
-
-        const now = new Date();
-        const sync = document.getElementById('lastSync');
-        if (sync) sync.textContent = now.toTimeString().split(' ')[0];
-
-        const total = Object.values(latest).reduce((sum, item) => sum + item.deposits, 0);
-        const alerts = Object.values(latest).filter(item => item.fill >= 85).length;
-        const totalEl = document.getElementById('totalDeposits');
-        const alertEl = document.getElementById('activeAlertCount');
-        if (totalEl) totalEl.textContent = total;
-        if (alertEl) alertEl.textContent = alerts;
-      }, (error) => {
-        console.error(`Firebase read error for ${binName}:`, error);
-      });
-    });
-
-    const deviceRef = ref(database, 'smartbin/device');
-    onValue(deviceRef, (snapshot) => {
-      const device = snapshot.val() || {};
-      const online = device.online === true;
-      const connStatus = document.getElementById('connStatus');
-      const connText = document.getElementById('connText');
-      const devIp = document.getElementById('devIp');
-
-      if (connStatus) connStatus.className = `conn-pill ${online ? 'online' : 'offline'}`;
-      if (connText) connText.textContent = online ? 'ESP32 Online' : 'ESP32 Offline';
-      if (devIp) devIp.textContent = device.ip || 'Not connected';
-    }, (error) => {
-      console.error('Firebase device read error:', error);
-    });
-  };
-
-  window.sendEmptyCmd = function (binName) {
-    const commandRef = ref(database, 'smartbin/commands');
-    set(commandRef, {
-      command: 'empty',
-      bin: binName,
-      timestamp: Date.now()
-    }).then(() => {
-      window.updateBinUI(binName, 0, 0, false);
-      console.log(`Empty command sent for ${binName}`);
-    }).catch((error) => {
-      console.error('Firebase command error:', error);
-      alert('Could not send command to Firebase. Check Database Rules.');
-    });
-  };
-
-  window.saveSettings = function () {
-    const threshold = document.getElementById('cfgAlertThreshold')?.value || 85;
-    const autolock = document.getElementById('cfgAutoLock')?.checked ?? true;
-
-    set(ref(database, 'smartbin/settings'), {
-      threshold: Number(threshold),
-      autoLock: autolock,
-      updatedAt: Date.now()
-    }).then(() => {
-      alert('Settings saved to Firebase.');
-    }).catch((error) => {
-      console.error('Firebase settings error:', error);
-      alert('Could not save settings. Check Database Rules.');
-    });
-  };
-</script>
-
-<!-- ═══════════ JAVASCRIPT LOGIC ═══════════ -->
-<script>
-
-  // Firebase is initialized in the module script above.
-  let startTime = Date.now();
-
-  window.addEventListener('load', initDashboard);
-
-  function initDashboard() {
-    initClock();
-    initNavigation();
-    if (window.initFirebase) window.initFirebase();
-    setInterval(updateUptime, 1000);
-  }
-
-  // Real-time Top Clock
-  function initClock() {
-    const rtTime = document.getElementById('rtTime');
-    const rtDate = document.getElementById('rtDate');
-    
-    function tick() {
-      const now = new Date();
-      rtTime.textContent = now.toTimeString().split(' ')[0];
-      rtDate.textContent = now.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-    }
-    setInterval(tick, 1000);
-    tick();
-  }
-
-  // Tab View Switcher Navigation
-  function initNavigation() {
-    const links = document.querySelectorAll('.sidebar-nav .nav-link');
-    links.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        links.forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-
-        // Toggle Views
-        const targetView = link.getAttribute('data-view');
-        document.querySelectorAll('.view-panel').forEach(panel => panel.classList.remove('active'));
-        document.getElementById(`view-${targetView}`).classList.add('active');
-
-        // Update Title TopBar
-        document.getElementById('viewTitle').textContent = link.getAttribute('data-title');
-        document.getElementById('viewSubtitle').textContent = link.getAttribute('data-sub');
-      });
-    });
-  }
-
-  // Firebase replaces the old WebSocket lifecycle.
-
-  // Dynamic UI Binder
-  window.updateBinUI = function updateBinUI(binName, fill, deposits, isOpen) {
-    // Fill updates
-    const fillEl = document.getElementById(`fill-${binName}`);
-    const barEl = document.getElementById(`bar-${binName}`);
-    const pctEl = document.getElementById(`pct-${binName}`);
-    const valEl = document.getElementById(`fill-val-${binName}`);
-    const tapsEl = document.getElementById(`taps-${binName}`);
-    const lidEl = document.getElementById(`lid-${binName}`);
-    const pillEl = document.getElementById(`pill-${binName}`);
-    const cardEl = document.getElementById(`card-${binName}`);
-
-    if(!fillEl) return;
-
-    // Apply Fill Heights
-    fillEl.style.height = `${fill}%`;
-    barEl.style.width = `${fill}%`;
-    pctEl.textContent = `${fill}%`;
-    valEl.textContent = `${fill}%`;
-    tapsEl.textContent = deposits;
-
-    // Servo Lid State
-    if(isOpen) lidEl.classList.add('open');
-    else lidEl.classList.remove('open');
-
-    // Threshold coloring
-    if(fill >= 85) {
-      fillEl.style.background = 'linear-gradient(to top, #DC2626, #EF4444)';
-      pillEl.className = 'bin-status-pill pill-locked';
-      pillEl.innerHTML = `<i class="bi bi-lock-fill"></i> Full`;
-      cardEl.classList.add('full-alert');
-    } else if (fill >= 65) {
-      fillEl.style.background = 'linear-gradient(to top, #D97706, #F59E0B)';
-      pillEl.className = 'bin-status-pill pill-warn';
-      pillEl.innerHTML = `<i class="bi bi-exclamation-triangle-fill"></i> Warning`;
-      cardEl.classList.remove('full-alert');
-    } else {
-      fillEl.style.background = 'linear-gradient(to top, var(--green-deep), var(--green))';
-      pillEl.className = 'bin-status-pill pill-ok';
-      pillEl.innerHTML = `<i class="bi bi-circle-fill" style="font-size:6px"></i> Normal`;
-      cardEl.classList.remove('full-alert');
-    }
-  }
-
-  // Actions are handled by the Firebase module script.
-
-  function updateUptime() {
-    const diff = Date.now() - startTime;
-    const hrs = String(Math.floor(diff / 3600000)).padStart(2, '0');
-    const mins = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-    const secs = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-    document.getElementById('systemUptime').textContent = `${hrs}:${mins}:${secs}`;
-  }
-</script>
->>>>>>> 44c21ec07aac13aeef27b04b60cdba3436424568
-
-      div.innerHTML = `
-        <div class="alert-icon-wrap ${iconClass}">
-          <i class="bi ${icon}"></i>
-        </div>
-        <div>
-          <div class="alert-title">${alert.level} — ${alert.bin} Bin</div>
-          <div class="alert-desc">${alert.message}</div>
-          <div class="alert-time">${alert.time}</div>
-        </div>
-      `;
-      alertList.appendChild(div);
-    });
-  }
-</script>
 </body>
+<script type="module" src="script.js"></script>
 </html>
