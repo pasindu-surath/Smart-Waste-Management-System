@@ -1,6 +1,6 @@
 # 🌍 Smart Waste Management System (IoT)
 
-![Smart Bin Project](images/smart-bin.jpg)
+![Smart Bin Project](images/project.jpeg)
 
 A complete, touchless, and real-time smart waste management solution. This project integrates automated hardware with a live web dashboard to monitor waste levels, prevent overflowing, and ensure a hygienic environment.
 
